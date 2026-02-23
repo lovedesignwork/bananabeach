@@ -151,10 +151,10 @@ function AdminLayoutContent({ children }: AdminLayoutProps) {
         )}
         
         {/* Logo */}
-        <div className="flex items-center justify-center h-20 px-3 border-b border-white/10 relative">
+        <div className="flex items-center justify-center h-28 px-4 border-b border-white/10 relative">
           <Link href="/admin" className="flex items-center justify-center w-full">
             {sidebarCollapsed ? (
-              <div className="w-10 h-10 relative">
+              <div className="w-12 h-12 relative">
                 <Image
                   src="/images/Logo-White-1.png"
                   alt="Banana Beach"
@@ -163,7 +163,7 @@ function AdminLayoutContent({ children }: AdminLayoutProps) {
                 />
               </div>
             ) : (
-              <div className="h-14 w-full relative">
+              <div className="h-[90px] w-full relative">
                 <Image
                   src="/images/Logo-White-1.png"
                   alt="Banana Beach"
