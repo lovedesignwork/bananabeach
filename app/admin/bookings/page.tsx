@@ -47,7 +47,7 @@ interface Booking {
   booking_addons: { quantity: number; promo_addons: { name: string } }[];
 }
 
-type SortField = 'booking_ref' | 'activity_date' | 'adult_count' | 'total_amount' | 'status' | 'created_at';
+type SortField = 'booking_ref' | 'activity_date' | 'adult_count' | 'child_count' | 'total_amount' | 'status' | 'created_at';
 type SortDirection = 'asc' | 'desc';
 
 const STATUS_OPTIONS = ['all', 'pending', 'confirmed', 'cancelled', 'completed', 'refunded'];
@@ -484,8 +484,14 @@ export default function BookingsPage() {
                         <SortIcon field="adult_count" />
                       </div>
                     </th>
-                    <th className="px-4 py-3 text-center text-xs font-medium text-slate-500 uppercase tracking-wider">
-                      Children
+                    <th 
+                      className="px-4 py-3 text-center text-xs font-medium text-slate-500 uppercase tracking-wider cursor-pointer hover:bg-slate-100"
+                      onClick={() => handleSort('child_count')}
+                    >
+                      <div className="flex items-center justify-center gap-1">
+                        Children
+                        <SortIcon field="child_count" />
+                      </div>
                     </th>
                     <th className="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
                       Transport
