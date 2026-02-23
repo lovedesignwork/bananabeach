@@ -31,7 +31,8 @@ export async function GET(
         packages (*),
         booking_customers (*),
         booking_addons (*, promo_addons (*)),
-        booking_transport (*)
+        booking_transport (*),
+        promo_codes (discount_type, discount_value)
       `)
       .eq('booking_ref', bookingRef)
       .single();

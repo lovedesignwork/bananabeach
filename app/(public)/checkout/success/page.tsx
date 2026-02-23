@@ -29,6 +29,7 @@ interface BookingData {
   adult_count: number;
   child_count?: number;
   total_amount: number;
+  discount_amount?: number;
   currency: string;
   packages: {
     name: string;
@@ -59,6 +60,10 @@ interface BookingData {
     non_players: number;
     private_passengers: number;
   }[] | null;
+  promo_codes?: {
+    discount_type: string;
+    discount_value: number;
+  } | null;
 }
 
 function SuccessContent() {
@@ -345,10 +350,42 @@ function SuccessContent() {
                   </div>
                 )}
 
-                {/* Total */}
-                <div className="border-t border-slate-100 pt-5 mt-5 flex items-center justify-between">
-                  <span className="text-slate-600 font-medium">Total Paid</span>
-                  <span className="font-heading text-3xl font-bold text-emerald-600">{formatCurrency(booking.total_amount)}</span>
+                {/* Pricing Summary */}
+                <div className="border-t border-slate-100 pt-5 mt-5 space-y-3">
+                  {/* Original Price (if discount applied) */}
+                  {booking.discount_amount && booking.discount_amount > 0 && (
+                    <>
+                      <div className="flex items-center justify-between">
+                        <span className="text-slate-500">Original Price</span>
+                        <span className="text-slate-400 line-through">{formatCurrency(booking.total_amount + booking.discount_amount)}</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-emerald-600 font-medium flex items-center gap-2">
+                          <span className="inline-flex items-center justify-center w-5 h-5 bg-emerald-100 rounded-full">
+                            <span className="text-xs">🎉</span>
+                          </span>
+                          Discount
+                          {booking.promo_codes?.discount_type === 'percentage' && (
+                            <span className="text-xs bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">
+                              {booking.promo_codes.discount_value}% OFF
+                            </span>
+                          )}
+                        </span>
+                        <span className="text-emerald-600 font-semibold">-{formatCurrency(booking.discount_amount)}</span>
+                      </div>
+                      <div className="border-t border-slate-100 pt-3 flex items-center justify-between">
+                        <span className="text-slate-800 font-bold">Total Paid</span>
+                        <span className="font-heading text-3xl font-bold text-emerald-600">{formatCurrency(booking.total_amount)}</span>
+                      </div>
+                    </>
+                  )}
+                  {/* No discount */}
+                  {(!booking.discount_amount || booking.discount_amount === 0) && (
+                    <div className="flex items-center justify-between">
+                      <span className="text-slate-600 font-medium">Total Paid</span>
+                      <span className="font-heading text-3xl font-bold text-emerald-600">{formatCurrency(booking.total_amount)}</span>
+                    </div>
+                  )}
                 </div>
               </div>
             </motion.div>
@@ -369,7 +406,7 @@ function SuccessContent() {
                   <span>
                     {hasTransfer 
                       ? `Please wait in your hotel lobby at least 15 minutes before pick-up time${transport?.hotel_name ? ` at ${transport.hotel_name}` : ''}`
-                      : `Arrive at Rawai Pier at least 30 minutes before your selected time (${booking.time_slot === 'flexible' ? 'Flexible' : booking.time_slot})`
+                      : `Arrive at Kan Eang at Pier Meeting Point at least 30 minutes before your selected time (${booking.time_slot === 'flexible' ? 'Flexible' : booking.time_slot})`
                     }
                   </span>
                 </li>
@@ -400,7 +437,7 @@ function SuccessContent() {
                   <MapPin className="w-7 h-7 text-white" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-slate-800 text-lg">Banana Beach - Rawai Pier</h3>
+                  <h3 className="font-bold text-slate-800 text-lg">Banana Beach - Kan Eang at Pier Meeting Point</h3>
                   <p className="text-sm text-slate-500">44/1 Moo 5, Viset Road, Rawai, Muang, Phuket 83130</p>
                 </div>
               </div>
