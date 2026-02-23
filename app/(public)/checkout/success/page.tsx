@@ -437,23 +437,25 @@ function SuccessContent() {
               </ul>
             </motion.div>
 
-            {/* Location Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="bg-white rounded-3xl shadow-xl p-5 mb-6"
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-emerald-500/30">
-                  <MapPin className="w-7 h-7 text-white" />
+            {/* Location Card - Only show for self-arrange customers */}
+            {!hasTransfer && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="bg-white rounded-3xl shadow-xl p-5 mb-6"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-14 h-14 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-emerald-500/30">
+                    <MapPin className="w-7 h-7 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-slate-800 text-lg">Banana Beach - Kan Eang at Pier Meeting Point</h3>
+                    <p className="text-sm text-slate-500">44/1 Moo 5, Viset Road, Rawai, Muang, Phuket 83130</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-bold text-slate-800 text-lg">Banana Beach - Kan Eang at Pier Meeting Point</h3>
-                  <p className="text-sm text-slate-500">44/1 Moo 5, Viset Road, Rawai, Muang, Phuket 83130</p>
-                </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            )}
           </>
         )}
 
