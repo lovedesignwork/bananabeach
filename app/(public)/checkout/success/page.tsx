@@ -125,6 +125,7 @@ function SuccessContent() {
   const customer = getCustomer();
   const transport = getTransport();
   const hasTransfer = transport && transport.transport_type !== 'self_arrange';
+  const isPrivateTransfer = transport?.transport_type === 'private';
   const nonPlayers = transport?.non_players || 0;
 
   if (error) {
@@ -301,14 +302,18 @@ function SuccessContent() {
                   </div>
                   {/* Transfer */}
                   <div className="text-center bg-slate-50 rounded-2xl py-4 px-3">
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-2 ${hasTransfer ? 'bg-emerald-100' : 'bg-slate-100'}`}>
-                      <Car className={`w-5 h-5 ${hasTransfer ? 'text-emerald-600' : 'text-slate-400'}`} />
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-2 ${hasTransfer ? (isPrivateTransfer ? 'bg-purple-100' : 'bg-emerald-100') : 'bg-slate-100'}`}>
+                      <Car className={`w-5 h-5 ${hasTransfer ? (isPrivateTransfer ? 'text-purple-600' : 'text-emerald-600') : 'text-slate-400'}`} />
                     </div>
                     <p className="text-[10px] text-slate-400 uppercase font-medium tracking-wider">Transfer</p>
                     <div className="mt-1">
                       {hasTransfer ? (
                         <>
-                          <p className="text-sm font-bold text-emerald-600">Free Pickup</p>
+                          {isPrivateTransfer ? (
+                            <p className="text-sm font-bold text-purple-600">Private Pickup</p>
+                          ) : (
+                            <p className="text-sm font-bold text-emerald-600">Free Shared Pick-up & Return</p>
+                          )}
                           {transport?.hotel_name && (
                             <p className="text-xs text-slate-500 truncate">
                               {transport.hotel_name}
