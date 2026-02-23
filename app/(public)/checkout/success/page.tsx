@@ -260,64 +260,64 @@ function SuccessContent() {
                 <h2 className="font-heading text-2xl font-bold text-white">{booking.packages?.name || 'Beach Day Package'}</h2>
               </div>
 
-              {/* Details Grid */}
-              <div className="p-6">
-                <div className="grid grid-cols-2 gap-4 mb-6">
+              {/* Details Grid - Compact */}
+              <div className="p-4">
+                <div className="grid grid-cols-2 gap-2 mb-4">
                   {/* Date */}
-                  <div className="text-center bg-slate-50 rounded-2xl py-4 px-3">
-                    <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mx-auto mb-2">
-                      <Calendar className="w-5 h-5 text-emerald-600" />
+                  <div className="flex items-center gap-3 bg-slate-50 rounded-xl py-3 px-3">
+                    <div className="w-9 h-9 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Calendar className="w-4 h-4 text-emerald-600" />
                     </div>
-                    <p className="text-[10px] text-slate-400 uppercase font-medium tracking-wider">Date</p>
-                    <p className="text-base font-bold text-slate-800 mt-1">
-                      {new Date(booking.activity_date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
-                    </p>
+                    <div>
+                      <p className="text-[10px] text-slate-400 uppercase font-medium">Date</p>
+                      <p className="text-sm font-bold text-slate-800">
+                        {new Date(booking.activity_date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
+                      </p>
+                    </div>
                   </div>
                   {/* Time */}
-                  <div className="text-center bg-slate-50 rounded-2xl py-4 px-3">
-                    <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mx-auto mb-2">
-                      <Clock className="w-5 h-5 text-emerald-600" />
+                  <div className="flex items-center gap-3 bg-slate-50 rounded-xl py-3 px-3">
+                    <div className="w-9 h-9 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Clock className="w-4 h-4 text-emerald-600" />
                     </div>
-                    <p className="text-[10px] text-slate-400 uppercase font-medium tracking-wider">Time</p>
-                    <p className="text-base font-bold text-slate-800 mt-1">
-                      {booking.time_slot === 'flexible' ? 'Flexible' : booking.time_slot}
-                    </p>
+                    <div>
+                      <p className="text-[10px] text-slate-400 uppercase font-medium">Time</p>
+                      <p className="text-sm font-bold text-slate-800">
+                        {booking.time_slot === 'flexible' ? 'Flexible' : booking.time_slot}
+                      </p>
+                    </div>
                   </div>
                   {/* Guests - Adults & Children */}
-                  <div className="text-center bg-slate-50 rounded-2xl py-4 px-3">
-                    <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mx-auto mb-2">
-                      <Users className="w-5 h-5 text-emerald-600" />
+                  <div className="flex items-center gap-3 bg-slate-50 rounded-xl py-3 px-3">
+                    <div className="w-9 h-9 bg-emerald-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <Users className="w-4 h-4 text-emerald-600" />
                     </div>
-                    <p className="text-[10px] text-slate-400 uppercase font-medium tracking-wider">Guests</p>
-                    <div className="mt-1">
+                    <div>
+                      <p className="text-[10px] text-slate-400 uppercase font-medium">Guests</p>
                       <p className="text-sm font-bold text-slate-800">
                         {booking.adult_count || 0} Adult{(booking.adult_count || 0) !== 1 ? 's' : ''}
+                        {booking.child_count && booking.child_count > 0 && (
+                          <span className="text-slate-600"> + {booking.child_count} Child{booking.child_count !== 1 ? 'ren' : ''}</span>
+                        )}
                       </p>
-                      {booking.child_count && booking.child_count > 0 && (
-                        <p className="text-sm font-semibold text-slate-600">
-                          {booking.child_count} Child{booking.child_count !== 1 ? 'ren' : ''}
-                        </p>
-                      )}
                     </div>
                   </div>
                   {/* Transfer */}
-                  <div className="text-center bg-slate-50 rounded-2xl py-4 px-3">
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-2 ${hasTransfer ? (isPrivateTransfer ? 'bg-purple-100' : 'bg-emerald-100') : 'bg-slate-100'}`}>
-                      <Car className={`w-5 h-5 ${hasTransfer ? (isPrivateTransfer ? 'text-purple-600' : 'text-emerald-600') : 'text-slate-400'}`} />
+                  <div className="flex items-center gap-3 bg-slate-50 rounded-xl py-3 px-3">
+                    <div className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 ${hasTransfer ? (isPrivateTransfer ? 'bg-purple-100' : 'bg-emerald-100') : 'bg-slate-100'}`}>
+                      <Car className={`w-4 h-4 ${hasTransfer ? (isPrivateTransfer ? 'text-purple-600' : 'text-emerald-600') : 'text-slate-400'}`} />
                     </div>
-                    <p className="text-[10px] text-slate-400 uppercase font-medium tracking-wider">Transfer</p>
-                    <div className="mt-1">
+                    <div className="min-w-0">
+                      <p className="text-[10px] text-slate-400 uppercase font-medium">Transfer</p>
                       {hasTransfer ? (
                         <>
                           {isPrivateTransfer ? (
-                            <p className="text-sm font-bold text-purple-600">Private Pickup</p>
+                            <p className="text-sm font-bold text-purple-600">Private</p>
                           ) : (
-                            <p className="text-sm font-bold text-emerald-600">Free Shared Pick-up & Return</p>
+                            <p className="text-sm font-bold text-emerald-600">Free Shared</p>
                           )}
                           {transport?.hotel_name && (
-                            <p className="text-xs text-slate-500 truncate">
-                              {transport.hotel_name}
-                            </p>
+                            <p className="text-xs text-slate-500 truncate">{transport.hotel_name}</p>
                           )}
                         </>
                       ) : (
