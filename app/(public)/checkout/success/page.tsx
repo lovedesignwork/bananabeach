@@ -395,26 +395,48 @@ function SuccessContent() {
               </div>
             </motion.div>
 
+            {/* What's Next? Card - For transfer customers */}
+            {hasTransfer && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-3xl p-6 mb-6 shadow-xl shadow-blue-500/20"
+              >
+                <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-3">
+                  <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                    <Mail className="w-5 h-5 text-white" />
+                  </div>
+                  What&apos;s Next?
+                </h3>
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+                  <p className="text-white/90 text-sm leading-relaxed">
+                    A confirmation email with your <strong className="text-white">exact pick-up time</strong> at <strong className="text-white">{transport?.hotel_name || 'your hotel'}</strong> will be sent to:
+                  </p>
+                  <div className="mt-3 bg-white/20 rounded-xl px-4 py-3 flex items-center gap-3">
+                    <Mail className="w-5 h-5 text-white/80" />
+                    <span className="text-white font-semibold">{customer?.email}</span>
+                  </div>
+                  <p className="text-white/70 text-xs mt-3">
+                    Please check your inbox (and spam folder) for this important information.
+                  </p>
+                </div>
+              </motion.div>
+            )}
+
             {/* Important Info Card */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
+              transition={{ delay: hasTransfer ? 0.5 : 0.4 }}
               className="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200/50 rounded-3xl p-6 mb-6"
             >
               <h3 className="text-amber-800 font-bold text-base mb-4 flex items-center gap-2">
                 <span className="text-xl">📋</span> Important Information
               </h3>
               <ul className="text-amber-700 text-sm space-y-2">
-                {/* Transfer-specific instruction */}
-                {hasTransfer ? (
-                  <li className="flex items-start gap-3">
-                    <ChevronRight className="w-4 h-4 mt-0.5 flex-shrink-0 text-amber-500" />
-                    <span>
-                      A confirmation email with your exact pick-up time at <strong>{transport?.hotel_name || 'your hotel'}</strong> will be sent to <strong>{customer?.email}</strong>. Please check your inbox (and spam folder) for this important information.
-                    </span>
-                  </li>
-                ) : (
+                {/* Self-arrange instruction */}
+                {!hasTransfer && (
                   <li className="flex items-start gap-3">
                     <ChevronRight className="w-4 h-4 mt-0.5 flex-shrink-0 text-amber-500" />
                     <span>
