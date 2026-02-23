@@ -1,7 +1,27 @@
 import { Resend } from 'resend';
 import { supabaseAdmin } from '@/lib/supabase/server';
 
-export const resend = new Resend(process.env.RESEND_API_KEY);
+let _resend: Resend | null = null;
+
+export function getResend(): Resend {
+  if (!_resend) {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      throw new Error('RESEND_API_KEY environment variable is not configured');
+    }
+    _resend = new Resend(apiKey);
+  }
+  return _resend;
+}
+
+// For backward compatibility - will throw at runtime if API key is missing
+export const resend = {
+  emails: {
+    send: async (...args: Parameters<Resend['emails']['send']>) => {
+      return getResend().emails.send(...args);
+    }
+  }
+};
 
 export const EMAIL_FROM = 'Banana Beach <relax@bananabeachkohhey.com>';
 

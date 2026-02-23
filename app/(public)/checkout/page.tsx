@@ -44,6 +44,7 @@ function CheckoutContent() {
   const date = searchParams.get('date');
   const time = searchParams.get('time');
   const guests = parseInt(searchParams.get('guests') || '1');
+  const children = parseInt(searchParams.get('children') || '0');
   const pickup = searchParams.get('pickup') === 'true';
   const hotel = searchParams.get('hotel') || '';
   const room = searchParams.get('room') || '';
@@ -73,6 +74,7 @@ function CheckoutContent() {
     if (date) params.set('date', date);
     if (time) params.set('time', time);
     params.set('guests', guests.toString());
+    if (children > 0) params.set('children', children.toString());
     params.set('pickup', pickup.toString());
     if (hotel) params.set('hotel', hotel);
     if (room) params.set('room', room);
@@ -81,7 +83,7 @@ function CheckoutContent() {
     if (nonPlayers > 0) params.set('nonPlayers', nonPlayers.toString());
     if (promoAddonsParam) params.set('promoAddons', promoAddonsParam);
     return `/booking?${params.toString()}`;
-  }, [packageId, date, time, guests, pickup, hotel, room, privateTransfer, privatePassengers, nonPlayers, promoAddonsParam]);
+  }, [packageId, date, time, guests, children, pickup, hotel, room, privateTransfer, privatePassengers, nonPlayers, promoAddonsParam]);
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -107,9 +109,10 @@ function CheckoutContent() {
   const [discountAmount, setDiscountAmount] = useState(0);
 
   const prices = useMemo(() => {
-    if (!selectedPackage) return { base: 0, promoAddons: 0, transfer: 0, discount: 0, subtotal: 0, total: 0 };
+    if (!selectedPackage) return { base: 0, childBase: 0, promoAddons: 0, transfer: 0, discount: 0, subtotal: 0, total: 0 };
     
     const base = selectedPackage.price * guests;
+    const childBase = selectedPackage.childPrice ? selectedPackage.childPrice * children : 0;
 
     let promoAddonsTotal = 0;
     Object.entries(promoAddonQuantities).forEach(([addonId, qty]) => {
@@ -128,17 +131,18 @@ function CheckoutContent() {
       transfer = nonPlayers * NON_PLAYER_PRICE;
     }
 
-    const subtotal = base + promoAddonsTotal + transfer;
+    const subtotal = base + childBase + promoAddonsTotal + transfer;
 
     return {
       base,
+      childBase,
       promoAddons: promoAddonsTotal,
       transfer,
       discount: discountAmount,
       subtotal,
       total: Math.max(0, subtotal - discountAmount)
     };
-  }, [selectedPackage, guests, promoAddonQuantities, privateTransfer, nonPlayers, discountAmount]);
+  }, [selectedPackage, guests, children, promoAddonQuantities, privateTransfer, nonPlayers, discountAmount]);
 
   const formatDisplayDate = (dateString: string) => {
     if (!dateString) return '';
@@ -224,6 +228,7 @@ function CheckoutContent() {
           date,
           time,
           guests,
+          children,
           pickup,
           hotel,
           room,
@@ -351,7 +356,7 @@ function CheckoutContent() {
                           </span>
                           <span className="flex items-center gap-1 text-slate-600">
                             <Users className="w-4 h-4 text-primary" />
-                            {guests} {guests === 1 ? 'Guest' : 'Guests'}
+                            {guests} {guests === 1 ? 'Adult' : 'Adults'}{children > 0 && ` | ${children} ${children === 1 ? 'Child' : 'Children'}`}
                           </span>
                         </div>
                       </div>
@@ -497,9 +502,16 @@ function CheckoutContent() {
                     {/* Order Items */}
                     <div className="space-y-3 text-sm">
                       <div className="flex justify-between">
-                        <span className="text-slate-600">{selectedPackage.name} × {guests}</span>
+                        <span className="text-slate-600">{selectedPackage.name} (Adult) × {guests}</span>
                         <span className="font-medium text-slate-800">{formatPrice(prices.base)}</span>
                       </div>
+                      
+                      {children > 0 && prices.childBase > 0 && (
+                        <div className="flex justify-between">
+                          <span className="text-slate-600">{selectedPackage.name} (Child) × {children}</span>
+                          <span className="font-medium text-slate-800">{formatPrice(prices.childBase)}</span>
+                        </div>
+                      )}
                       
                       {/* Promo addons */}
                       {Object.entries(promoAddonQuantities).map(([addonId, qty]) => {

@@ -7,6 +7,7 @@ interface BookingData {
   date: string;
   time: string;
   guests: number;
+  children: number;
   pickup: boolean;
   hotel?: string;
   room?: string;
@@ -35,6 +36,7 @@ export async function POST(request: NextRequest) {
       date,
       time,
       guests,
+      children = 0,
       pickup,
       hotel,
       room,
@@ -77,6 +79,11 @@ export async function POST(request: NextRequest) {
 
     // Calculate total
     let totalAmount = packageData.price * guests;
+    
+    // Add children cost if applicable
+    if (children > 0 && packageData.child_price) {
+      totalAmount += packageData.child_price * children;
+    }
 
     // Add addons cost
     if (addonsData) {
@@ -122,6 +129,7 @@ export async function POST(request: NextRequest) {
         activity_date: date,
         time_slot: time,
         guest_count: guests,
+        child_count: children,
         status: 'pending',
         total_amount: finalAmount,
         discount_amount: discountAmount,
@@ -176,7 +184,10 @@ export async function POST(request: NextRequest) {
 
     // Build description for Stripe
     const timeDisplay = time === 'flexible' ? '8AM-6PM (Flexible)' : time;
-    const description = `${packageData.name} - ${guests} guest(s) on ${date} at ${timeDisplay}`;
+    const guestDescription = children > 0 
+      ? `${guests} adult(s), ${children} child(ren)` 
+      : `${guests} guest(s)`;
+    const description = `${packageData.name} - ${guestDescription} on ${date} at ${timeDisplay}`;
 
     // Create Payment Intent - card only
     const paymentIntent = await stripe.paymentIntents.create({

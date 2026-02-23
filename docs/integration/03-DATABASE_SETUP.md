@@ -110,28 +110,23 @@ CREATE INDEX idx_booking_addons_booking_id ON booking_addons(booking_id);
 **This trigger automatically generates unique booking references.**
 
 ```sql
--- Function to generate booking reference
+-- Create a sequence for booking numbers
+CREATE SEQUENCE IF NOT EXISTS booking_number_seq START 1;
+
+-- Function to generate booking reference (BB-000001 format)
 CREATE OR REPLACE FUNCTION generate_booking_ref()
 RETURNS TRIGGER AS $$
 DECLARE
+  next_num INTEGER;
   new_ref TEXT;
-  ref_exists BOOLEAN;
 BEGIN
-  LOOP
-    -- Generate reference: PREFIX + date (YYMMDD) + random 4 chars
-    -- Change 'SR' to your site prefix (e.g., 'FH' for Flying Hanuman)
-    new_ref := 'SR' || TO_CHAR(NOW(), 'YYMMDD') || UPPER(SUBSTRING(MD5(RANDOM()::TEXT) FROM 1 FOR 4));
-    
-    -- Check if this ref already exists
-    SELECT EXISTS(SELECT 1 FROM bookings WHERE booking_ref = new_ref) INTO ref_exists;
-    
-    -- If not exists, use it
-    IF NOT ref_exists THEN
-      NEW.booking_ref := new_ref;
-      EXIT;
-    END IF;
-  END LOOP;
+  -- Get next sequence number
+  SELECT nextval('booking_number_seq') INTO next_num;
   
+  -- Format as BB-000001 (padded to 6 digits)
+  new_ref := 'BB-' || LPAD(next_num::TEXT, 6, '0');
+  
+  NEW.booking_ref := new_ref;
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
@@ -146,8 +141,8 @@ CREATE TRIGGER generate_booking_ref_trigger
 ```
 
 **Booking Reference Format:**
-- `SR260221A7B3` = SR (SkyRock) + 260221 (Feb 21, 2026) + A7B3 (random)
-- `FH260221C4D2` = FH (Flying Hanuman) + 260221 (Feb 21, 2026) + C4D2 (random)
+- `BB-000001` = BB (Banana Beach) + 000001 (sequential number)
+- `BB-000123` = BB (Banana Beach) + 000123 (sequential number)
 
 ---
 

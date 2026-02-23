@@ -55,6 +55,7 @@ export type Database = {
           activity_date: string;
           time_slot: string;
           guest_count: number;
+          child_count: number;
           status: 'pending' | 'confirmed' | 'cancelled' | 'completed' | 'refunded' | 'partially_refunded';
           stripe_payment_intent_id: string | null;
           stripe_checkout_session_id: string | null;
