@@ -3,11 +3,13 @@
 import { useState, useEffect, useMemo, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { 
   ArrowLeft, Calendar, Clock, Users, MapPin, Car, 
   CreditCard, Lock, ShieldCheck, CheckCircle, AlertCircle,
-  User, Mail, Phone, ChevronDown, Pencil, Loader2, Tag, X
+  User, Mail, Pencil, Loader2, Tag, X, Palmtree
 } from 'lucide-react';
+import { CountryPhoneSelector } from '@/components/ui/CountryPhoneSelector';
 import Link from 'next/link';
 import { Container, Section } from '@/components/ui';
 import { packages } from '@/lib/data/packages';
@@ -17,19 +19,29 @@ import EmbeddedCardForm from '@/components/checkout/EmbeddedCardForm';
 
 const promotionalAddons = [
   {
-    id: 'snorkeling-gear',
-    name: 'Snorkeling Gear',
-    price: 300,
+    id: 'parasailing',
+    name: 'Parasailing',
+    price: 1800,
   },
   {
-    id: 'beach-photos',
-    name: 'Beach Photos',
-    price: 500,
+    id: 'massage-1hr',
+    name: 'Massage 1 Hour',
+    price: 540,
   },
   {
-    id: 'kayak-rental',
-    name: 'Kayak Rental',
-    price: 400,
+    id: 'beach-lounge-chair',
+    name: 'Beach Lounge Chair',
+    price: 600,
+  },
+  {
+    id: 'banana-boat',
+    name: 'Banana Boat',
+    price: 800,
+  },
+  {
+    id: 'happy-birthday',
+    name: 'Happy Birthday',
+    price: 1200,
   },
 ];
 
@@ -273,16 +285,21 @@ function CheckoutContent() {
 
   if (!selectedPackage) {
     return (
-      <main className="min-h-screen bg-slate-50">
+      <main className="min-h-screen bg-slate-900">
         <Section className="relative overflow-hidden min-h-[calc(100vh-80px)]">
           <Container className="relative z-10">
             <div className="max-w-lg mx-auto text-center py-20">
-              <AlertCircle className="w-16 h-16 text-primary mx-auto mb-4" />
-              <h1 className="text-2xl font-bold text-slate-800 mb-4">No Booking Found</h1>
-              <p className="text-slate-600 mb-8">Please select a package and complete the booking form first.</p>
+              <div className="w-20 h-20 rounded-full bg-emerald-400/20 border-2 border-emerald-400/40 flex items-center justify-center mx-auto mb-6">
+                <AlertCircle className="w-10 h-10 text-emerald-400" />
+              </div>
+              <h1 className="font-heading text-3xl font-bold text-white mb-4">No Booking Found</h1>
+              <p className="text-white/60 mb-8">Please select a package and complete the booking form first.</p>
               <Link href="/booking">
-                <button className="px-8 py-3 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl transition-colors">
+                <button className="group px-8 py-4 bg-emerald-400 hover:bg-emerald-300 text-slate-900 font-bold rounded-2xl transition-all duration-300 flex items-center gap-3 mx-auto">
                   Go to Booking
+                  <span className="w-8 h-8 rounded-full bg-slate-900/20 flex items-center justify-center group-hover:bg-slate-900/30 transition-colors">
+                    <ArrowLeft className="w-4 h-4 rotate-180" />
+                  </span>
                 </button>
               </Link>
             </div>
@@ -293,22 +310,46 @@ function CheckoutContent() {
   }
 
   return (
-    <main className="bg-slate-50">
-      <Section 
-        className="relative overflow-hidden !pt-8"
-        style={{ background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 30%, #f1f5f9 60%, #f8fafc 100%)', paddingBottom: '250px' }}
-      >
+    <main className="min-h-screen bg-slate-900">
+      {/* Hero Section with Background */}
+      <div className="relative pt-8 pb-12">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80"
+            alt="Beach background"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-900/95 via-slate-900/90 to-slate-900" />
+        </div>
+        
+        {/* Decorative Elements */}
+        <div className="absolute top-20 right-10 opacity-10 pointer-events-none hidden lg:block">
+          <Palmtree className="w-32 h-32 text-emerald-400" />
+        </div>
+        <div className="absolute bottom-40 left-10 opacity-10 pointer-events-none hidden lg:block rotate-12">
+          <Palmtree className="w-24 h-24 text-emerald-400" />
+        </div>
+
         <Container className="relative z-10">
           {/* Header */}
           <div className="mb-8">
-            <Link href="/booking" className="inline-flex items-center gap-2 text-slate-500 hover:text-slate-800 transition-colors mb-4">
-              <ArrowLeft className="w-4 h-4" />
+            <Link href="/booking" className="inline-flex items-center gap-2 text-white/60 hover:text-emerald-400 transition-colors mb-6 group">
+              <span className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-emerald-400/20 transition-colors">
+                <ArrowLeft className="w-4 h-4" />
+              </span>
               Back to Booking
             </Link>
-            <h1 className="text-3xl md:text-4xl font-bold text-slate-800 font-[family-name:var(--font-oswald)]">
-              CHECKOUT
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-1 h-8 bg-emerald-400 rounded-full" />
+              <span className="text-emerald-400 text-sm font-medium tracking-wider uppercase">Secure Checkout</span>
+            </div>
+            <h1 className="font-heading text-4xl md:text-5xl font-bold text-white mb-3">
+              Complete Your Booking
             </h1>
-            <p className="text-slate-600 mt-2">Complete your booking securely</p>
+            <p className="text-white/60 text-lg">Just a few more details to confirm your paradise escape</p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-8">
@@ -318,17 +359,16 @@ function CheckoutContent() {
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="bg-white rounded-2xl overflow-hidden shadow-xl"
-                  style={{ border: '2px solid #00c5ba' }}
+                  className="bg-white/10 backdrop-blur-xl rounded-3xl overflow-hidden border border-white/20"
                 >
-                  <div className="px-6 py-4 bg-primary flex items-center justify-between">
+                  <div className="px-6 py-4 bg-emerald-400/20 border-b border-emerald-400/30 flex items-center justify-between">
                     <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                      <Calendar className="w-5 h-5 text-white" />
+                      <Calendar className="w-5 h-5 text-emerald-400" />
                       Booking Summary
                     </h2>
                     <Link 
                       href={editBookingUrl}
-                      className="flex items-center gap-1.5 text-sm text-white/70 hover:text-white transition-colors"
+                      className="flex items-center gap-1.5 text-sm text-emerald-400 hover:text-emerald-300 transition-colors"
                     >
                       <Pencil className="w-4 h-4" />
                       Edit
@@ -337,25 +377,25 @@ function CheckoutContent() {
                   <div className="p-6">
                     <div className="flex gap-4">
                       <div 
-                        className="w-24 h-24 rounded-xl bg-cover bg-center flex-shrink-0"
+                        className="w-24 h-24 rounded-2xl bg-cover bg-center flex-shrink-0 border-2 border-emerald-400/30"
                         style={{ backgroundImage: `url(${selectedPackage.image})` }}
                       />
                       <div className="flex-grow">
-                        <h3 className="text-[28px] font-semibold text-slate-800 font-[family-name:var(--font-oswald)]">
+                        <h3 className="font-heading text-2xl font-bold text-white">
                           {selectedPackage.name}
                         </h3>
-                        <p className="text-slate-500 text-sm">{selectedPackage.duration}</p>
+                        <p className="text-emerald-400/80 text-sm">{selectedPackage.duration}</p>
                         <div className="flex flex-wrap gap-4 mt-3 text-sm">
-                          <span className="flex items-center gap-1 text-slate-600">
-                            <Calendar className="w-4 h-4 text-primary" />
+                          <span className="flex items-center gap-1.5 text-white/70">
+                            <Calendar className="w-4 h-4 text-emerald-400" />
                             {formatDisplayDate(date || '')}
                           </span>
-                          <span className="flex items-center gap-1 text-slate-600">
-                            <Clock className="w-4 h-4 text-primary" />
+                          <span className="flex items-center gap-1.5 text-white/70">
+                            <Clock className="w-4 h-4 text-emerald-400" />
                             {formatTime(time || '')}
                           </span>
-                          <span className="flex items-center gap-1 text-slate-600">
-                            <Users className="w-4 h-4 text-primary" />
+                          <span className="flex items-center gap-1.5 text-white/70">
+                            <Users className="w-4 h-4 text-emerald-400" />
                             {guests} {guests === 1 ? 'Adult' : 'Adults'}{children > 0 && ` | ${children} ${children === 1 ? 'Child' : 'Children'}`}
                           </span>
                         </div>
@@ -364,15 +404,15 @@ function CheckoutContent() {
                     
                     {/* Transport info */}
                     {selectedPackage.includesTransfer && (
-                      <div className="mt-4 pt-4 border-t border-slate-100">
+                      <div className="mt-4 pt-4 border-t border-white/10">
                         <div className="flex items-start gap-3">
-                          <Car className="w-5 h-5 text-primary mt-0.5" />
+                          <Car className="w-5 h-5 text-emerald-400 mt-0.5" />
                           <div>
-                            <p className="font-medium text-slate-800">
+                            <p className="font-medium text-white">
                               {privateTransfer ? 'Private Transfer' : pickup ? 'Hotel Pickup' : 'Self Transfer'}
                             </p>
                             {pickup && hotel && (
-                              <p className="text-sm text-slate-500">{hotel}{room ? `, Room ${room}` : ''}</p>
+                              <p className="text-sm text-white/60">{hotel}{room ? `, Room ${room}` : ''}</p>
                             )}
                           </div>
                         </div>
@@ -381,17 +421,16 @@ function CheckoutContent() {
                   </div>
                 </motion.div>
 
-                {/* Player Details */}
+                {/* Guest Details - White Theme */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 }}
-                  className="bg-white rounded-2xl overflow-hidden shadow-xl"
-                  style={{ border: '2px solid #00c5ba' }}
+                  className="bg-white rounded-3xl shadow-2xl"
                 >
-                  <div className="px-6 py-4 bg-primary">
+                  <div className="px-6 py-4 bg-gradient-to-r from-slate-900 to-emerald-900 border-b border-emerald-400/30 rounded-t-3xl">
                     <h2 className="text-lg font-bold text-white flex items-center gap-2">
-                      <User className="w-5 h-5 text-white" />
+                      <User className="w-5 h-5 text-emerald-400" />
                       Guest Details
                     </h2>
                   </div>
@@ -404,7 +443,7 @@ function CheckoutContent() {
                           value={firstName}
                           onChange={(e) => setFirstName(e.target.value)}
                           placeholder="John"
-                          className="w-full h-11 px-4 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 text-sm focus:outline-none focus:border-primary"
+                          className="w-full h-12 px-4 bg-white border border-slate-200 rounded-xl text-slate-800 placeholder:text-slate-400 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all"
                           required
                         />
                       </div>
@@ -415,7 +454,7 @@ function CheckoutContent() {
                           value={lastName}
                           onChange={(e) => setLastName(e.target.value)}
                           placeholder="Doe"
-                          className="w-full h-11 px-4 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 text-sm focus:outline-none focus:border-primary"
+                          className="w-full h-12 px-4 bg-white border border-slate-200 rounded-xl text-slate-800 placeholder:text-slate-400 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all"
                           required
                         />
                       </div>
@@ -424,13 +463,13 @@ function CheckoutContent() {
                     <div>
                       <label className="block text-sm font-medium text-slate-700 mb-1.5">Email Address *</label>
                       <div className="relative">
-                        <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                        <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                         <input
                           type="email"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="john@example.com"
-                          className="w-full h-11 pl-10 pr-4 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 text-sm focus:outline-none focus:border-primary"
+                          className="w-full h-12 pl-11 pr-4 bg-white border border-slate-200 rounded-xl text-slate-800 placeholder:text-slate-400 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all"
                           required
                         />
                       </div>
@@ -438,35 +477,14 @@ function CheckoutContent() {
                     
                     <div>
                       <label className="block text-sm font-medium text-slate-700 mb-1.5">Phone Number *</label>
-                      <div className="flex gap-2">
-                        <div className="relative w-24">
-                          <select
-                            value={countryCode}
-                            onChange={(e) => setCountryCode(e.target.value)}
-                            className="w-full h-11 px-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 text-sm focus:outline-none focus:border-primary appearance-none"
-                          >
-                            <option value="+66">+66</option>
-                            <option value="+1">+1</option>
-                            <option value="+44">+44</option>
-                            <option value="+61">+61</option>
-                            <option value="+81">+81</option>
-                            <option value="+82">+82</option>
-                            <option value="+86">+86</option>
-                          </select>
-                          <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
-                        </div>
-                        <div className="relative flex-grow">
-                          <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
-                          <input
-                            type="tel"
-                            value={phone}
-                            onChange={(e) => setPhone(e.target.value.replace(/\D/g, ''))}
-                            placeholder="812345678"
-                            className="w-full h-11 pl-10 pr-4 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 text-sm focus:outline-none focus:border-primary"
-                            required
-                          />
-                        </div>
-                      </div>
+                      <CountryPhoneSelector
+                        value={phone}
+                        onChange={setPhone}
+                        onCountryChange={setCountryCode}
+                        defaultCountry="TH"
+                        placeholder="812345678"
+                        variant="light"
+                      />
                     </div>
                     
                     <div>
@@ -476,7 +494,7 @@ function CheckoutContent() {
                         onChange={(e) => setSpecialRequests(e.target.value)}
                         placeholder="Any dietary requirements, accessibility needs, or special occasions..."
                         rows={3}
-                        className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-800 text-sm focus:outline-none focus:border-primary resize-none"
+                        className="w-full px-4 py-3 bg-white border border-slate-200 rounded-xl text-slate-800 placeholder:text-slate-400 text-sm focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all resize-none"
                       />
                     </div>
                   </div>
@@ -490,12 +508,14 @@ function CheckoutContent() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
-                  className="bg-white rounded-2xl overflow-hidden shadow-xl sticky top-24"
-                  style={{ border: '2px solid #00c5ba' }}
+                  className="bg-white rounded-3xl overflow-hidden shadow-2xl sticky top-24"
                 >
                   {/* Order Summary Header */}
-                  <div className="px-6 py-4 bg-primary">
-                    <h2 className="text-lg font-bold text-white">Order Summary</h2>
+                  <div className="px-6 py-4 bg-gradient-to-r from-slate-900 to-emerald-900 border-b border-emerald-400/30">
+                    <h2 className="text-lg font-bold text-white flex items-center gap-2">
+                      <Tag className="w-5 h-5 text-emerald-400" />
+                      Order Summary
+                    </h2>
                   </div>
                   
                   <div className="p-6">
@@ -539,12 +559,12 @@ function CheckoutContent() {
                       {/* Promo Code Section */}
                       <div className="border-t border-slate-200 pt-3 mt-3">
                         {appliedPromo ? (
-                          <div className="flex items-center justify-between p-3 bg-green-50 rounded-lg border border-green-200">
+                          <div className="flex items-center justify-between p-3 bg-emerald-50 rounded-xl border border-emerald-200">
                             <div className="flex items-center gap-2">
-                              <Tag className="w-4 h-4 text-green-600" />
+                              <Tag className="w-4 h-4 text-emerald-600" />
                               <div>
-                                <span className="font-medium text-green-700">{appliedPromo.code}</span>
-                                <p className="text-xs text-green-600">
+                                <span className="font-medium text-emerald-700">{appliedPromo.code}</span>
+                                <p className="text-xs text-emerald-600">
                                   {appliedPromo.discount_type === 'percentage' 
                                     ? `${appliedPromo.discount_value}% off` 
                                     : `฿${appliedPromo.discount_value.toLocaleString()} off`}
@@ -553,7 +573,7 @@ function CheckoutContent() {
                             </div>
                             <button
                               onClick={removePromoCode}
-                              className="p-1 text-green-600 hover:bg-green-100 rounded"
+                              className="p-1 text-emerald-600 hover:bg-emerald-100 rounded-lg transition-colors"
                             >
                               <X className="w-4 h-4" />
                             </button>
@@ -566,13 +586,13 @@ function CheckoutContent() {
                                 value={promoCodeInput}
                                 onChange={(e) => setPromoCodeInput(e.target.value.toUpperCase())}
                                 placeholder="Promo code"
-                                className="flex-1 px-3 py-2 border border-slate-200 rounded-lg text-sm text-slate-800 uppercase placeholder:normal-case placeholder:text-slate-400 focus:outline-none focus:border-primary"
+                                className="flex-1 px-4 py-2.5 border border-slate-200 rounded-xl text-sm text-slate-800 uppercase placeholder:normal-case placeholder:text-slate-400 focus:outline-none focus:border-emerald-400 focus:ring-2 focus:ring-emerald-400/20 transition-all"
                                 onKeyDown={(e) => e.key === 'Enter' && validatePromoCode()}
                               />
                               <button
                                 onClick={validatePromoCode}
                                 disabled={promoValidating || !promoCodeInput.trim()}
-                                className="px-4 py-2 bg-slate-100 text-slate-700 rounded-lg text-sm font-medium hover:bg-slate-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="px-4 py-2.5 bg-slate-900 text-white rounded-xl text-sm font-medium hover:bg-slate-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                               >
                                 {promoValidating ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Apply'}
                               </button>
@@ -586,16 +606,16 @@ function CheckoutContent() {
 
                       {/* Discount */}
                       {discountAmount > 0 && (
-                        <div className="flex justify-between text-green-600">
+                        <div className="flex justify-between text-emerald-600">
                           <span>Discount</span>
                           <span className="font-medium">-{formatPrice(discountAmount)}</span>
                         </div>
                       )}
                       
-                      <div className="border-t border-slate-200 pt-3 mt-3">
+                      <div className="border-t border-slate-200 pt-4 mt-3">
                         <div className="flex justify-between items-center">
                           <span className="text-lg font-bold text-slate-800">Total</span>
-                          <span className="text-2xl font-bold text-primary font-[family-name:var(--font-oswald)]">
+                          <span className="font-heading text-3xl font-bold text-emerald-600">
                             {formatPrice(prices.total)}
                           </span>
                         </div>
@@ -605,8 +625,8 @@ function CheckoutContent() {
                     
                     {/* Payment Section */}
                     <div className="pt-6 mt-6 border-t border-slate-200">
-                      <h3 className="text-slate-800 mb-4 flex items-center gap-2" style={{ fontSize: '21px', fontWeight: 400 }}>
-                        <CreditCard className="w-[21px] h-[21px]" />
+                      <h3 className="text-slate-800 mb-4 flex items-center gap-2 font-semibold text-lg">
+                        <CreditCard className="w-5 h-5 text-emerald-600" />
                         Payment Details
                       </h3>
                       
@@ -620,28 +640,28 @@ function CheckoutContent() {
                         />
                       </StripeCardProvider>
                       
-                      <div className="flex items-center gap-2 p-2.5 bg-green-50 rounded-lg border border-green-100 mt-4">
-                        <Lock className="w-4 h-4 text-green-600 flex-shrink-0" />
-                        <span className="text-xs text-green-700">Your payment is secured with 256-bit SSL encryption</span>
+                      <div className="flex items-center gap-2 p-3 bg-emerald-50 rounded-xl border border-emerald-100 mt-4">
+                        <Lock className="w-4 h-4 text-emerald-600 flex-shrink-0" />
+                        <span className="text-xs text-emerald-700">Your payment is secured with 256-bit SSL encryption</span>
                       </div>
                     </div>
                     
                     {/* Trust badges */}
                     <div className="mt-6 pt-6 border-t border-slate-100">
                       <p className="text-xs text-slate-500 text-center mb-4">
-                        The Credit Card Descriptor statement will display the payment for <span style={{ fontSize: '15px', fontWeight: 900, color: '#0057D1' }}>ONEBOOKING</span>
+                        The Credit Card Descriptor statement will display the payment for <span className="font-bold text-slate-700">ONEBOOKING</span>
                       </p>
-                      <div className="flex items-center justify-center gap-4 text-xs text-slate-400">
-                        <span className="flex items-center gap-1">
-                          <ShieldCheck className="w-4 h-4" />
+                      <div className="flex items-center justify-center gap-6 text-xs text-slate-500">
+                        <span className="flex items-center gap-1.5">
+                          <ShieldCheck className="w-4 h-4 text-emerald-500" />
                           Secure
                         </span>
-                        <span className="flex items-center gap-1">
-                          <Lock className="w-4 h-4" />
+                        <span className="flex items-center gap-1.5">
+                          <Lock className="w-4 h-4 text-emerald-500" />
                           SSL
                         </span>
-                        <span className="flex items-center gap-1">
-                          <CheckCircle className="w-4 h-4" />
+                        <span className="flex items-center gap-1.5">
+                          <CheckCircle className="w-4 h-4 text-emerald-500" />
                           Verified
                         </span>
                       </div>
@@ -651,7 +671,7 @@ function CheckoutContent() {
               </div>
             </div>
         </Container>
-      </Section>
+      </div>
     </main>
   );
 }
@@ -659,11 +679,14 @@ function CheckoutContent() {
 export default function CheckoutPage() {
   return (
     <Suspense fallback={
-      <main className="min-h-screen bg-slate-50">
+      <main className="min-h-screen bg-slate-900">
         <Section className="relative overflow-hidden min-h-[calc(100vh-80px)]">
           <Container className="relative z-10">
-            <div className="flex items-center justify-center py-20">
-              <div className="w-8 h-8 border-2 border-slate-300 border-t-primary rounded-full animate-spin" />
+            <div className="flex flex-col items-center justify-center py-20">
+              <div className="w-16 h-16 rounded-full bg-emerald-400/20 border-2 border-emerald-400/40 flex items-center justify-center mb-4">
+                <Loader2 className="w-8 h-8 text-emerald-400 animate-spin" />
+              </div>
+              <p className="text-white/60">Loading checkout...</p>
             </div>
           </Container>
         </Section>

@@ -55,14 +55,32 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Server configuration error. Please contact support.' }, { status: 500 });
     }
 
-    // Get package details
-    const { data: packageData, error: packageError } = await supabaseAdmin
+    // Get package details - try by slug first (for frontend compatibility), then by id
+    let packageData = null;
+    let packageError = null;
+
+    // First try to find by slug (frontend uses slugs like "everyday", "snorkeling", etc.)
+    const { data: packageBySlug, error: slugError } = await supabaseAdmin
       .from('packages')
       .select('*')
-      .eq('id', packageId)
+      .eq('slug', packageId)
       .single();
 
-    if (packageError) {
+    if (!slugError && packageBySlug) {
+      packageData = packageBySlug;
+    } else {
+      // Fallback to id lookup if slug not found
+      const { data: packageById, error: idError } = await supabaseAdmin
+        .from('packages')
+        .select('*')
+        .eq('id', packageId)
+        .single();
+      
+      packageData = packageById;
+      packageError = idError;
+    }
+
+    if (packageError && !packageData) {
       console.error('Package fetch error:', packageError);
       return NextResponse.json({ error: `Failed to fetch package: ${packageError.message}` }, { status: 500 });
     }
@@ -71,11 +89,31 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Package not found' }, { status: 404 });
     }
 
-    // Get addon details
-    const { data: addonsData } = await supabaseAdmin
-      .from('promo_addons')
-      .select('*')
-      .in('id', Object.keys(promoAddons));
+    // Get addon details - support both slug and id lookup
+    const addonKeys = Object.keys(promoAddons).filter(key => promoAddons[key] > 0);
+    let addonsData: any[] = [];
+    
+    if (addonKeys.length > 0) {
+      // Try to find by slug first
+      const { data: addonsBySlug } = await supabaseAdmin
+        .from('promo_addons')
+        .select('*')
+        .in('slug', addonKeys);
+      
+      if (addonsBySlug && addonsBySlug.length > 0) {
+        addonsData = addonsBySlug;
+      } else {
+        // Fallback to id lookup
+        const { data: addonsById } = await supabaseAdmin
+          .from('promo_addons')
+          .select('*')
+          .in('id', addonKeys);
+        
+        if (addonsById) {
+          addonsData = addonsById;
+        }
+      }
+    }
 
     // Calculate total
     let totalAmount = packageData.price * guests;
@@ -85,12 +123,12 @@ export async function POST(request: NextRequest) {
       totalAmount += packageData.child_price * children;
     }
 
-    // Add addons cost
-    if (addonsData) {
+    // Add addons cost - check both slug and id for quantity lookup
+    if (addonsData && addonsData.length > 0) {
       for (const addon of addonsData) {
-        const qty = promoAddons[addon.id] || 0;
+        const qty = promoAddons[addon.slug] || promoAddons[addon.id] || 0;
         if (qty > 0) {
-          totalAmount += addon.price * qty;
+          totalAmount += Number(addon.price) * qty;
         }
       }
     }
@@ -121,11 +159,11 @@ export async function POST(request: NextRequest) {
       await supabaseAdmin.rpc('increment_promo_usage', { promo_id: promoCodeId });
     }
 
-    // Create booking in pending state
+    // Create booking in pending state - use the actual package UUID from database
     const { data: booking, error: bookingError } = await supabaseAdmin
       .from('bookings')
       .insert({
-        package_id: packageId,
+        package_id: packageData.id, // Use the actual UUID from the fetched package
         activity_date: date,
         time_slot: time,
         guest_count: guests,
@@ -166,15 +204,15 @@ export async function POST(request: NextRequest) {
       transport_cost: transportCost,
     });
 
-    // Insert addons
-    if (addonsData) {
+    // Insert addons - check both slug and id for quantity lookup
+    if (addonsData && addonsData.length > 0) {
       const addonInserts = addonsData
-        .filter((addon) => promoAddons[addon.id] > 0)
+        .filter((addon) => (promoAddons[addon.slug] || promoAddons[addon.id]) > 0)
         .map((addon) => ({
           booking_id: booking.id,
-          addon_id: addon.id,
-          quantity: promoAddons[addon.id],
-          unit_price: addon.price,
+          addon_id: addon.id, // Always use the actual UUID for database reference
+          quantity: promoAddons[addon.slug] || promoAddons[addon.id],
+          unit_price: Number(addon.price),
         }));
 
       if (addonInserts.length > 0) {

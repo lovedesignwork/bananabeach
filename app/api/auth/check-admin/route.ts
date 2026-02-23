@@ -36,15 +36,20 @@ export async function GET(request: NextRequest) {
     const userEmail = user.email || email;
     const userId = user.id;
 
+    console.log('[check-admin] User verified:', { userId, userEmail });
+
     // Check admin_users table using the user's authenticated session
     // First try by email
     if (userEmail) {
+      console.log('[check-admin] Querying by email:', userEmail);
       const { data: adminUser, error: adminError } = await supabase
         .from('admin_users')
         .select('*')
         .eq('email', userEmail)
         .eq('is_active', true)
         .single();
+
+      console.log('[check-admin] Email query result:', { adminUser, adminError: adminError?.message });
 
       if (!adminError && adminUser) {
         return NextResponse.json({
@@ -61,12 +66,15 @@ export async function GET(request: NextRequest) {
     }
 
     // Try by user id (in case admin_users.id references auth.users.id)
+    console.log('[check-admin] Querying by id:', userId);
     const { data: adminById, error: adminByIdError } = await supabase
       .from('admin_users')
       .select('*')
       .eq('id', userId)
       .eq('is_active', true)
       .single();
+
+    console.log('[check-admin] ID query result:', { adminById, adminByIdError: adminByIdError?.message });
 
     if (!adminByIdError && adminById) {
       return NextResponse.json({
@@ -81,7 +89,7 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    return NextResponse.json({ isAdmin: false, error: 'Not an admin user' });
+    return NextResponse.json({ isAdmin: false, error: 'Not an admin user', debug: { userEmail, userId } });
   } catch (error) {
     console.error('Check admin error:', error);
     return NextResponse.json({ isAdmin: false, error: 'Failed to check admin status' });

@@ -2,7 +2,6 @@
 
 import { ReactNode, useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { 
   LayoutDashboard, 
@@ -23,6 +22,7 @@ import {
   Scale,
   PanelLeftClose,
   PanelLeft,
+  Palmtree,
 } from 'lucide-react';
 import { AuthProvider, useAuth } from '@/contexts/AuthContext';
 
@@ -138,31 +138,34 @@ function AdminLayoutContent({ children }: AdminLayoutProps) {
     <div className="min-h-screen bg-slate-100">
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 bg-[#1a1a1a] transform transition-all duration-300 ease-in-out ${
+        className={`fixed inset-y-0 left-0 z-50 bg-gradient-to-b from-slate-900 via-slate-900 to-emerald-950 transform transition-all duration-300 ease-in-out ${
           sidebarCollapsed ? 'w-20' : 'w-64'
         } ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0`}
       >
+        {/* Decorative palm tree */}
+        {!sidebarCollapsed && (
+          <div className="absolute top-32 right-2 opacity-10 pointer-events-none">
+            <Palmtree className="w-20 h-20 text-emerald-400" />
+          </div>
+        )}
+        
         {/* Logo */}
         <div className="flex items-center justify-center h-20 px-3 border-b border-white/10 relative">
-          <Link href="/admin" className="flex items-center justify-center w-full">
+          <Link href="/admin" className="flex items-center justify-center gap-3 w-full">
             {sidebarCollapsed ? (
-              <Image
-                src="/images/LOGO-NS.png"
-                alt="BB"
-                width={40}
-                height={40}
-                className="h-10 w-10 object-contain"
-                priority
-              />
+              <div className="w-10 h-10 rounded-full bg-emerald-400/20 border-2 border-emerald-400/40 flex items-center justify-center">
+                <span className="font-heading text-lg font-bold text-emerald-400">BB</span>
+              </div>
             ) : (
-              <Image
-                src="/images/LOGO-NS.png"
-                alt="Banana Beach"
-                width={220}
-                height={60}
-                className="h-14 w-full max-w-[200px] object-contain"
-                priority
-              />
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-full bg-emerald-400/20 border-2 border-emerald-400/40 flex items-center justify-center flex-shrink-0">
+                  <span className="font-heading text-xl font-bold text-emerald-400">BB</span>
+                </div>
+                <div className="flex flex-col">
+                  <span className="font-heading text-lg font-bold text-white leading-tight">Banana Beach</span>
+                  <span className="text-xs text-emerald-400/80 tracking-wider">KOH HEY • PHUKET</span>
+                </div>
+              </div>
             )}
           </Link>
           <button
@@ -184,17 +187,17 @@ function AdminLayoutContent({ children }: AdminLayoutProps) {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors ${
+                className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${
                   sidebarCollapsed ? 'justify-center px-2' : ''
                 } ${
                   isActive
-                    ? 'bg-white/20 text-white'
+                    ? 'bg-emerald-400/20 text-emerald-400 border border-emerald-400/30'
                     : 'text-white/70 hover:bg-white/10 hover:text-white'
                 }`}
                 onClick={() => setSidebarOpen(false)}
                 title={sidebarCollapsed ? item.label : undefined}
               >
-                <Icon className="w-5 h-5 flex-shrink-0" />
+                <Icon className={`w-5 h-5 flex-shrink-0 ${isActive ? 'text-emerald-400' : ''}`} />
                 {!sidebarCollapsed && <span className="font-medium">{item.label}</span>}
               </Link>
             );
@@ -205,7 +208,7 @@ function AdminLayoutContent({ children }: AdminLayoutProps) {
         <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-white/10">
           <button
             onClick={() => setSidebarCollapsed(!sidebarCollapsed)}
-            className={`hidden lg:flex w-full items-center gap-3 px-4 py-3 text-white/70 hover:bg-white/10 hover:text-white rounded-xl transition-colors ${
+            className={`hidden lg:flex w-full items-center gap-3 px-4 py-3 text-white/70 hover:bg-emerald-400/10 hover:text-emerald-400 rounded-xl transition-colors ${
               sidebarCollapsed ? 'justify-center px-2' : ''
             }`}
             title={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
@@ -232,10 +235,10 @@ function AdminLayoutContent({ children }: AdminLayoutProps) {
 
       {/* Main content */}
       <div className={`transition-all duration-300 ${sidebarCollapsed ? 'lg:pl-20' : 'lg:pl-64'}`}>
-        <header className="h-16 bg-white shadow-sm flex items-center justify-between px-4 lg:px-8">
+        <header className="h-16 bg-white shadow-sm flex items-center justify-between px-4 lg:px-8 border-b border-slate-200">
           <button
             onClick={() => setSidebarOpen(true)}
-            className="lg:hidden text-slate-600 hover:text-slate-800"
+            className="lg:hidden text-slate-600 hover:text-emerald-600 transition-colors"
           >
             <Menu className="w-6 h-6" />
           </button>
@@ -252,10 +255,10 @@ function AdminLayoutContent({ children }: AdminLayoutProps) {
                 <p className="text-sm font-medium text-slate-800">
                   {adminUser?.full_name || adminUser?.email?.split('@')[0] || 'Admin'}
                 </p>
-                <p className="text-xs text-slate-500 capitalize">{adminUser?.role || 'Admin'}</p>
+                <p className="text-xs text-emerald-600 capitalize font-medium">{adminUser?.role || 'Admin'}</p>
               </div>
-              <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center">
-                <span className="text-primary font-bold text-sm">
+              <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-full flex items-center justify-center shadow-lg shadow-emerald-400/30">
+                <span className="text-white font-bold text-sm">
                   {adminUser?.full_name?.[0]?.toUpperCase() || adminUser?.email?.[0]?.toUpperCase() || 'A'}
                 </span>
               </div>
@@ -263,13 +266,21 @@ function AdminLayoutContent({ children }: AdminLayoutProps) {
 
             {/* Dropdown Menu */}
             {userMenuOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-slate-200 py-1 z-50">
-                <div className="px-4 py-2 border-b border-slate-100 sm:hidden">
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-slate-200 py-1 z-50 overflow-hidden">
+                <div className="px-4 py-3 border-b border-slate-100 sm:hidden bg-slate-50">
                   <p className="text-sm font-medium text-slate-800">
                     {adminUser?.full_name || adminUser?.email?.split('@')[0] || 'Admin'}
                   </p>
-                  <p className="text-xs text-slate-500 capitalize">{adminUser?.role || 'Admin'}</p>
+                  <p className="text-xs text-emerald-600 capitalize font-medium">{adminUser?.role || 'Admin'}</p>
                 </div>
+                <Link
+                  href="/"
+                  className="w-full flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-50 transition-colors"
+                  onClick={() => setUserMenuOpen(false)}
+                >
+                  <Palmtree className="w-4 h-4" />
+                  <span className="font-medium">View Website</span>
+                </Link>
                 <button
                   onClick={() => {
                     setUserMenuOpen(false);
