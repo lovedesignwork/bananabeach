@@ -166,7 +166,7 @@ export async function POST(request: NextRequest) {
         package_id: packageData.id, // Use the actual UUID from the fetched package
         activity_date: date,
         time_slot: time,
-        guest_count: guests,
+        adult_count: guests,
         child_count: children,
         status: 'pending',
         total_amount: finalAmount,
