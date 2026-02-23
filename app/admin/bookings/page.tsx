@@ -34,7 +34,7 @@ interface Booking {
   booking_ref: string;
   activity_date: string;
   time_slot: string;
-  guest_count: number;
+  adult_count: number;
   child_count?: number;
   total_amount: number;
   discount_amount?: number;
@@ -47,7 +47,7 @@ interface Booking {
   booking_addons: { quantity: number; promo_addons: { name: string } }[];
 }
 
-type SortField = 'booking_ref' | 'activity_date' | 'guest_count' | 'total_amount' | 'status' | 'created_at';
+type SortField = 'booking_ref' | 'activity_date' | 'adult_count' | 'total_amount' | 'status' | 'created_at';
 type SortDirection = 'asc' | 'desc';
 
 const STATUS_OPTIONS = ['all', 'pending', 'confirmed', 'cancelled', 'completed', 'refunded'];
@@ -477,11 +477,11 @@ export default function BookingsPage() {
                     </th>
                     <th 
                       className="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider cursor-pointer hover:bg-slate-100"
-                      onClick={() => handleSort('guest_count')}
+                      onClick={() => handleSort('adult_count')}
                     >
                       <div className="flex items-center gap-1">
                         Adults | Children
-                        <SortIcon field="guest_count" />
+                        <SortIcon field="adult_count" />
                       </div>
                     </th>
                     <th className="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
@@ -572,7 +572,7 @@ export default function BookingsPage() {
                         </td>
                         <td className="px-4 py-3 whitespace-nowrap text-center">
                           <p className="text-sm text-slate-800">
-                            {booking.guest_count}{booking.child_count && booking.child_count > 0 ? ` | ${booking.child_count}` : ' | 0'}
+                            {booking.adult_count}{booking.child_count && booking.child_count > 0 ? ` | ${booking.child_count}` : ' | 0'}
                           </p>
                         </td>
                         <td className="px-4 py-3 whitespace-nowrap">
@@ -588,7 +588,7 @@ export default function BookingsPage() {
                                 </span>
                               ) : transport?.transport_type === 'hotel_pickup' && (
                                 <span className="text-xs text-slate-600">
-                                  Pickup: {booking.guest_count + (booking.child_count || 0)} pax
+                                  Pickup: {booking.adult_count + (booking.child_count || 0)} pax
                                 </span>
                               )}
                             </div>
