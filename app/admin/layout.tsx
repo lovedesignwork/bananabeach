@@ -25,6 +25,7 @@ import {
   Palmtree,
 } from 'lucide-react';
 import { AuthProvider, useAuth } from '@/contexts/AuthContext';
+import Image from 'next/image';
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -151,20 +152,24 @@ function AdminLayoutContent({ children }: AdminLayoutProps) {
         
         {/* Logo */}
         <div className="flex items-center justify-center h-20 px-3 border-b border-white/10 relative">
-          <Link href="/admin" className="flex items-center justify-center gap-3 w-full">
+          <Link href="/admin" className="flex items-center justify-center w-full">
             {sidebarCollapsed ? (
-              <div className="w-10 h-10 rounded-full bg-emerald-400/20 border-2 border-emerald-400/40 flex items-center justify-center">
-                <span className="font-heading text-lg font-bold text-emerald-400">BB</span>
+              <div className="w-10 h-10 relative">
+                <Image
+                  src="/images/Logo-White-1.png"
+                  alt="Banana Beach"
+                  fill
+                  className="object-contain"
+                />
               </div>
             ) : (
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-emerald-400/20 border-2 border-emerald-400/40 flex items-center justify-center flex-shrink-0">
-                  <span className="font-heading text-xl font-bold text-emerald-400">BB</span>
-                </div>
-                <div className="flex flex-col">
-                  <span className="font-heading text-lg font-bold text-white leading-tight">Banana Beach</span>
-                  <span className="text-xs text-emerald-400/80 tracking-wider">KOH HEY • PHUKET</span>
-                </div>
+              <div className="h-14 w-full relative">
+                <Image
+                  src="/images/Logo-White-1.png"
+                  alt="Banana Beach"
+                  fill
+                  className="object-contain"
+                />
               </div>
             )}
           </Link>
