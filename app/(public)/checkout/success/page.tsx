@@ -256,64 +256,77 @@ function SuccessContent() {
 
               {/* Details Grid */}
               <div className="p-6">
-                <div className="grid grid-cols-3 gap-4 mb-6">
-                  <div className="text-center">
-                    <div className="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center mx-auto mb-3">
-                      <Calendar className="w-6 h-6 text-emerald-600" />
+                <div className="grid grid-cols-2 gap-4 mb-6">
+                  {/* Date */}
+                  <div className="text-center bg-slate-50 rounded-2xl py-4 px-3">
+                    <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mx-auto mb-2">
+                      <Calendar className="w-5 h-5 text-emerald-600" />
                     </div>
                     <p className="text-[10px] text-slate-400 uppercase font-medium tracking-wider">Date</p>
                     <p className="text-base font-bold text-slate-800 mt-1">
-                      {new Date(booking.activity_date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                      {new Date(booking.activity_date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
                     </p>
                   </div>
-                  <div className="text-center">
-                    <div className="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center mx-auto mb-3">
-                      <Clock className="w-6 h-6 text-emerald-600" />
+                  {/* Time */}
+                  <div className="text-center bg-slate-50 rounded-2xl py-4 px-3">
+                    <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mx-auto mb-2">
+                      <Clock className="w-5 h-5 text-emerald-600" />
                     </div>
                     <p className="text-[10px] text-slate-400 uppercase font-medium tracking-wider">Time</p>
                     <p className="text-base font-bold text-slate-800 mt-1">
                       {booking.time_slot === 'flexible' ? 'Flexible' : booking.time_slot}
                     </p>
                   </div>
-                  <div className="text-center">
-                    <div className="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center mx-auto mb-3">
-                      <Users className="w-6 h-6 text-emerald-600" />
+                  {/* Guests - Adults & Children */}
+                  <div className="text-center bg-slate-50 rounded-2xl py-4 px-3">
+                    <div className="w-12 h-12 bg-emerald-100 rounded-xl flex items-center justify-center mx-auto mb-2">
+                      <Users className="w-5 h-5 text-emerald-600" />
                     </div>
                     <p className="text-[10px] text-slate-400 uppercase font-medium tracking-wider">Guests</p>
-                    <p className="text-base font-bold text-slate-800 mt-1">
-                      {booking.adult_count || 0}
-                      {booking.child_count && booking.child_count > 0 ? ` + ${booking.child_count}` : ''}
-                    </p>
+                    <div className="mt-1">
+                      <p className="text-sm font-bold text-slate-800">
+                        {booking.adult_count || 0} Adult{(booking.adult_count || 0) !== 1 ? 's' : ''}
+                      </p>
+                      {booking.child_count && booking.child_count > 0 && (
+                        <p className="text-sm font-semibold text-slate-600">
+                          {booking.child_count} Child{booking.child_count !== 1 ? 'ren' : ''}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                  {/* Transfer */}
+                  <div className="text-center bg-slate-50 rounded-2xl py-4 px-3">
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-2 ${hasTransfer ? 'bg-emerald-100' : 'bg-slate-100'}`}>
+                      <Car className={`w-5 h-5 ${hasTransfer ? 'text-emerald-600' : 'text-slate-400'}`} />
+                    </div>
+                    <p className="text-[10px] text-slate-400 uppercase font-medium tracking-wider">Transfer</p>
+                    <div className="mt-1">
+                      {hasTransfer ? (
+                        <>
+                          <p className="text-sm font-bold text-emerald-600">Free Pickup</p>
+                          {transport?.hotel_name && (
+                            <p className="text-xs text-slate-500 truncate">
+                              {transport.hotel_name}
+                            </p>
+                          )}
+                        </>
+                      ) : (
+                        <p className="text-sm font-bold text-slate-600">Coming Direct</p>
+                      )}
+                    </div>
                   </div>
                 </div>
 
-                {/* Non-Players & Transport */}
-                {(nonPlayers > 0 || hasTransfer) && (
+                {/* Non-Players Info */}
+                {nonPlayers > 0 && (
                   <div className="border-t border-slate-100 pt-5 space-y-3">
-                    {nonPlayers > 0 && (
-                      <div className="flex items-center justify-between bg-slate-50 rounded-xl px-4 py-3">
-                        <div className="flex items-center gap-3">
-                          <UserMinus className="w-5 h-5 text-slate-400" />
-                          <span className="text-sm text-slate-600">Non-Players</span>
-                        </div>
-                        <span className="text-sm font-bold text-slate-800">{nonPlayers} person(s)</span>
+                    <div className="flex items-center justify-between bg-slate-50 rounded-xl px-4 py-3">
+                      <div className="flex items-center gap-3">
+                        <UserMinus className="w-5 h-5 text-slate-400" />
+                        <span className="text-sm text-slate-600">Non-Players</span>
                       </div>
-                    )}
-                    {hasTransfer && (
-                      <div className="flex items-center justify-between bg-slate-50 rounded-xl px-4 py-3">
-                        <div className="flex items-center gap-3">
-                          <Car className="w-5 h-5 text-emerald-500" />
-                          <span className="text-sm text-slate-600">
-                            {transport?.transport_type === 'hotel_pickup' ? 'Hotel Pickup' : 'Private Transfer'}
-                          </span>
-                        </div>
-                        {transport?.hotel_name && (
-                          <span className="text-sm font-bold text-slate-800">
-                            {transport.hotel_name}{transport.room_number ? ` #${transport.room_number}` : ''}
-                          </span>
-                        )}
-                      </div>
-                    )}
+                      <span className="text-sm font-bold text-slate-800">{nonPlayers} person(s)</span>
+                    </div>
                   </div>
                 )}
 
@@ -353,11 +366,16 @@ function SuccessContent() {
               <ul className="text-amber-700 text-sm space-y-2">
                 <li className="flex items-start gap-3">
                   <ChevronRight className="w-4 h-4 mt-0.5 flex-shrink-0 text-amber-500" />
-                  <span>{hasTransfer ? 'Be at your hotel lobby 15 minutes before pick-up time' : 'Arrive at Rawai Pier at least 30 minutes before departure'}</span>
+                  <span>
+                    {hasTransfer 
+                      ? `Please wait in your hotel lobby at least 15 minutes before pick-up time${transport?.hotel_name ? ` at ${transport.hotel_name}` : ''}`
+                      : `Arrive at Rawai Pier at least 30 minutes before your selected time (${booking.time_slot === 'flexible' ? 'Flexible' : booking.time_slot})`
+                    }
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <ChevronRight className="w-4 h-4 mt-0.5 flex-shrink-0 text-amber-500" />
-                  <span>Bring your booking confirmation</span>
+                  <span>Bring your booking confirmation (Reference: {bookingRef})</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <ChevronRight className="w-4 h-4 mt-0.5 flex-shrink-0 text-amber-500" />
