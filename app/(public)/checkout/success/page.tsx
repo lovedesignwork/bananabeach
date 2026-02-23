@@ -401,26 +401,46 @@ function SuccessContent() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
-                className="bg-gradient-to-br from-blue-500 to-blue-600 rounded-3xl p-6 mb-6 shadow-xl shadow-blue-500/20"
+                className="relative rounded-3xl p-[2px] mb-6 overflow-hidden"
               >
-                <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-3">
-                  <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
-                    <Mail className="w-5 h-5 text-white" />
+                {/* Animated gradient border */}
+                <div 
+                  className="absolute inset-0 rounded-3xl"
+                  style={{
+                    background: 'linear-gradient(90deg, #10b981, #14b8a6, #06b6d4, #10b981)',
+                    backgroundSize: '300% 100%',
+                    animation: 'gradientMove 3s ease infinite',
+                  }}
+                />
+                {/* Inner content */}
+                <div className="relative bg-gradient-to-br from-slate-900 to-slate-800 rounded-[22px] p-6">
+                  <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-3">
+                    <div className="w-10 h-10 bg-gradient-to-br from-emerald-400/30 to-cyan-400/30 rounded-xl flex items-center justify-center border border-emerald-400/40">
+                      <Mail className="w-5 h-5 text-emerald-400" />
+                    </div>
+                    What&apos;s Next?
+                  </h3>
+                  <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-4 border border-white/10">
+                    <p className="text-white/80 text-sm leading-relaxed">
+                      A confirmation email with your <strong className="text-emerald-400">exact pick-up time</strong> at <strong className="text-emerald-400">{transport?.hotel_name || 'your hotel'}</strong> will be sent to:
+                    </p>
+                    <div className="mt-3 bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 rounded-xl px-4 py-3 flex items-center gap-3 border border-emerald-400/30">
+                      <Mail className="w-5 h-5 text-emerald-400" />
+                      <span className="text-white font-semibold">{customer?.email}</span>
+                    </div>
+                    <p className="text-white/50 text-xs mt-3">
+                      Please check your inbox (and spam folder) for this important information.
+                    </p>
                   </div>
-                  What&apos;s Next?
-                </h3>
-                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
-                  <p className="text-white/90 text-sm leading-relaxed">
-                    A confirmation email with your <strong className="text-white">exact pick-up time</strong> at <strong className="text-white">{transport?.hotel_name || 'your hotel'}</strong> will be sent to:
-                  </p>
-                  <div className="mt-3 bg-white/20 rounded-xl px-4 py-3 flex items-center gap-3">
-                    <Mail className="w-5 h-5 text-white/80" />
-                    <span className="text-white font-semibold">{customer?.email}</span>
-                  </div>
-                  <p className="text-white/70 text-xs mt-3">
-                    Please check your inbox (and spam folder) for this important information.
-                  </p>
                 </div>
+                {/* CSS for animation */}
+                <style jsx>{`
+                  @keyframes gradientMove {
+                    0% { background-position: 0% 50%; }
+                    50% { background-position: 100% 50%; }
+                    100% { background-position: 0% 50%; }
+                  }
+                `}</style>
               </motion.div>
             )}
 
