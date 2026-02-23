@@ -30,7 +30,7 @@ export async function verifyAdminAuth(request: NextRequest): Promise<AuthResult>
     const { data: adminUser, error: adminError } = await supabaseAdmin
       .from('admin_users')
       .select('id, email, role, is_active')
-      .eq('user_id', user.id)
+      .eq('id', user.id)
       .single();
 
     if (adminError || !adminUser) {
