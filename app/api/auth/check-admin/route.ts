@@ -1,77 +1,87 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { supabaseAdmin } from '@/lib/supabase/server';
+import { createClient } from '@supabase/supabase-js';
 
 export async function GET(request: NextRequest) {
   try {
-    // Get the authorization header or check for email in query params
     const authHeader = request.headers.get('authorization');
     const { searchParams } = new URL(request.url);
     const email = searchParams.get('email');
 
-    let userId: string | null = null;
-    let userEmail: string | null = email;
-
-    // If we have an auth header with Bearer token, verify it
-    if (authHeader?.startsWith('Bearer ')) {
-      const token = authHeader.substring(7);
-      const { data: { user }, error } = await supabaseAdmin.auth.getUser(token);
-      
-      if (error || !user) {
-        return NextResponse.json({ isAdmin: false, error: 'Invalid token' });
-      }
-      
-      userId = user.id;
-      userEmail = user.email || null;
+    if (!authHeader?.startsWith('Bearer ')) {
+      return NextResponse.json({ isAdmin: false, error: 'No auth token provided' });
     }
 
-    // If we have an email (from query or token), look up the admin user
+    const token = authHeader.substring(7);
+    
+    // Create a client with the user's token to verify and get user info
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+    const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+    
+    // Verify the token by getting user info
+    const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+      global: {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    });
+
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
+    
+    if (authError || !user) {
+      console.error('Auth error:', authError);
+      return NextResponse.json({ isAdmin: false, error: 'Invalid token' });
+    }
+
+    const userEmail = user.email || email;
+    const userId = user.id;
+
+    // Check admin_users table using the user's authenticated session
+    // First try by email
     if (userEmail) {
-      const { data: adminUser, error: adminError } = await supabaseAdmin
+      const { data: adminUser, error: adminError } = await supabase
         .from('admin_users')
         .select('*')
         .eq('email', userEmail)
         .eq('is_active', true)
         .single();
 
-      if (adminError) {
-        console.error('Admin lookup error:', adminError);
-        return NextResponse.json({ isAdmin: false, error: 'Not an admin' });
+      if (!adminError && adminUser) {
+        return NextResponse.json({
+          isAdmin: true,
+          role: adminUser.role,
+          user: {
+            id: adminUser.id,
+            email: adminUser.email,
+            fullName: adminUser.full_name,
+            role: adminUser.role,
+          },
+        });
       }
+    }
 
+    // Try by user id (in case admin_users.id references auth.users.id)
+    const { data: adminById, error: adminByIdError } = await supabase
+      .from('admin_users')
+      .select('*')
+      .eq('id', userId)
+      .eq('is_active', true)
+      .single();
+
+    if (!adminByIdError && adminById) {
       return NextResponse.json({
-        isAdmin: !!adminUser,
-        role: adminUser?.role || null,
-        user: adminUser ? {
-          id: adminUser.id,
-          email: adminUser.email,
-          fullName: adminUser.full_name,
-          role: adminUser.role,
-        } : null,
+        isAdmin: true,
+        role: adminById.role,
+        user: {
+          id: adminById.id,
+          email: adminById.email,
+          fullName: adminById.full_name,
+          role: adminById.role,
+        },
       });
     }
 
-    // If we have a userId from the token, look up by user_id
-    if (userId) {
-      const { data: adminUser } = await supabaseAdmin
-        .from('admin_users')
-        .select('*')
-        .eq('user_id', userId)
-        .eq('is_active', true)
-        .single();
-
-      return NextResponse.json({
-        isAdmin: !!adminUser,
-        role: adminUser?.role || null,
-        user: adminUser ? {
-          id: adminUser.id,
-          email: adminUser.email,
-          fullName: adminUser.full_name,
-          role: adminUser.role,
-        } : null,
-      });
-    }
-
-    return NextResponse.json({ isAdmin: false, error: 'Not authenticated' });
+    return NextResponse.json({ isAdmin: false, error: 'Not an admin user' });
   } catch (error) {
     console.error('Check admin error:', error);
     return NextResponse.json({ isAdmin: false, error: 'Failed to check admin status' });
