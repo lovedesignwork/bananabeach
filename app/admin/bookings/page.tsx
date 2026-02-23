@@ -476,13 +476,16 @@ export default function BookingsPage() {
                       </div>
                     </th>
                     <th 
-                      className="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider cursor-pointer hover:bg-slate-100"
+                      className="px-4 py-3 text-center text-xs font-medium text-slate-500 uppercase tracking-wider cursor-pointer hover:bg-slate-100"
                       onClick={() => handleSort('adult_count')}
                     >
-                      <div className="flex items-center gap-1">
-                        Adults | Children
+                      <div className="flex items-center justify-center gap-1">
+                        Adults
                         <SortIcon field="adult_count" />
                       </div>
+                    </th>
+                    <th className="px-4 py-3 text-center text-xs font-medium text-slate-500 uppercase tracking-wider">
+                      Children
                     </th>
                     <th className="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">
                       Transport
@@ -571,8 +574,13 @@ export default function BookingsPage() {
                           </p>
                         </td>
                         <td className="px-4 py-3 whitespace-nowrap text-center">
-                          <p className="text-sm text-slate-800">
-                            {booking.adult_count}{booking.child_count && booking.child_count > 0 ? ` | ${booking.child_count}` : ' | 0'}
+                          <p className="text-sm font-medium text-slate-800">
+                            {booking.adult_count}
+                          </p>
+                        </td>
+                        <td className="px-4 py-3 whitespace-nowrap text-center">
+                          <p className="text-sm font-medium text-slate-800">
+                            {booking.child_count || 0}
                           </p>
                         </td>
                         <td className="px-4 py-3 whitespace-nowrap">
