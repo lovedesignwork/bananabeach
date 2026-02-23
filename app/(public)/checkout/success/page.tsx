@@ -406,15 +406,22 @@ function SuccessContent() {
                 <span className="text-xl">📋</span> Important Information
               </h3>
               <ul className="text-amber-700 text-sm space-y-2">
-                <li className="flex items-start gap-3">
-                  <ChevronRight className="w-4 h-4 mt-0.5 flex-shrink-0 text-amber-500" />
-                  <span>
-                    {hasTransfer 
-                      ? `Please wait in your hotel lobby at least 15 minutes before pick-up time${transport?.hotel_name ? ` at ${transport.hotel_name}` : ''}`
-                      : `Arrive at Kan Eang at Pier Meeting Point at least 30 minutes before your selected time (${booking.time_slot === 'flexible' ? 'Flexible' : booking.time_slot})`
-                    }
-                  </span>
-                </li>
+                {/* Transfer-specific instruction */}
+                {hasTransfer ? (
+                  <li className="flex items-start gap-3">
+                    <ChevronRight className="w-4 h-4 mt-0.5 flex-shrink-0 text-amber-500" />
+                    <span>
+                      A confirmation email with your exact pick-up time at <strong>{transport?.hotel_name || 'your hotel'}</strong> will be sent to <strong>{customer?.email}</strong>. Please check your inbox (and spam folder) for this important information.
+                    </span>
+                  </li>
+                ) : (
+                  <li className="flex items-start gap-3">
+                    <ChevronRight className="w-4 h-4 mt-0.5 flex-shrink-0 text-amber-500" />
+                    <span>
+                      Arrive at Kan Eang at Pier Meeting Point at least 30 minutes before your selected time ({booking.time_slot === 'flexible' ? 'Flexible' : booking.time_slot})
+                    </span>
+                  </li>
+                )}
                 <li className="flex items-start gap-3">
                   <ChevronRight className="w-4 h-4 mt-0.5 flex-shrink-0 text-amber-500" />
                   <span>Bring your booking confirmation (Reference: {bookingRef})</span>
