@@ -5,12 +5,12 @@ import Image from 'next/image';
 import { Instagram } from 'lucide-react';
 
 const images = [
-  'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&q=85',
-  'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=85',
-  'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=600&q=85',
-  'https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=600&q=85',
-  'https://images.unsplash.com/photo-1476673160081-cf065607f449?w=600&q=85',
-  'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=600&q=85',
+  '/images/Imagesz/DJI_0477_resize.jpg',
+  '/images/Imagesz/G0030171_resize.jpg',
+  '/images/Imagesz/IMG_0018_resize.jpg',
+  '/images/Imagesz/IMG_0507_resize.jpg',
+  '/images/Imagesz/DJI_20241021145526_0034_D_resize.jpg',
+  '/images/Imagesz/S__119693336_resize.jpg',
 ];
 
 export function PhotoGallery() {

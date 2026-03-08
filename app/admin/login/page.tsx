@@ -68,7 +68,7 @@ export default function AdminLoginPage() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="https://images.unsplash.com/photo-1540202404-a2f29016b523?w=1920&q=90"
+          src="/images/Imagesz/DJI_20250219123702_0002_D_resize.jpg"
           alt="Banana Beach"
           fill
           className="object-cover"

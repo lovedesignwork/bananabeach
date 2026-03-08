@@ -5,20 +5,20 @@ import Image from 'next/image';
 import { Instagram } from 'lucide-react';
 
 const instagramImages = [
-  'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&q=80',
-  'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&q=80',
-  'https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=400&q=80',
-  'https://images.unsplash.com/photo-1476673160081-cf065607f449?w=400&q=80',
-  'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=400&q=80',
-  'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=400&q=80',
-  'https://images.unsplash.com/photo-1520454974749-611b7248ffdb?w=400&q=80',
-  'https://images.unsplash.com/photo-1540202404-a2f29016b523?w=400&q=80',
-  'https://images.unsplash.com/photo-1506929562872-bb421503ef21?w=400&q=80',
-  'https://images.unsplash.com/photo-1468413253725-0d5181091126?w=400&q=80',
-  'https://images.unsplash.com/photo-1473116763249-2faaef81ccda?w=400&q=80',
-  'https://images.unsplash.com/photo-1505881502353-a1986add3762?w=400&q=80',
-  'https://images.unsplash.com/photo-1484821582734-6c6c9f99a672?w=400&q=80',
-  'https://images.unsplash.com/photo-1501426026826-31c667bdf23d?w=400&q=80',
+  '/images/Imagesz/DJI_0477_resize.jpg',
+  '/images/Imagesz/G0030171_resize.jpg',
+  '/images/Imagesz/IMG_0507_resize.jpg',
+  '/images/Imagesz/DJI_20241021145526_0034_D_resize.jpg',
+  '/images/Imagesz/IMG_0018_resize.jpg',
+  '/images/Imagesz/S__119693336_resize.jpg',
+  '/images/Imagesz/IMG_0366 (1)_resize.jpg',
+  '/images/Imagesz/DJI_20250219123702_0002_D_resize.jpg',
+  '/images/Imagesz/IMG_7665_resize.jpg',
+  '/images/Imagesz/IMG_1015_resize.jpg',
+  '/images/Imagesz/DJI_0889_resize.jpg',
+  '/images/Imagesz/IMG_0659_resize.jpg',
+  '/images/Imagesz/IMG_9364_resize.jpg',
+  '/images/Imagesz/IMG_7915_resize.jpg',
 ];
 
 export function InstagramFeed() {

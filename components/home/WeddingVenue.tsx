@@ -81,7 +81,7 @@ export function WeddingVenue() {
               {/* Main Large Image */}
               <div className="col-span-8 row-span-4 relative rounded-3xl overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=85"
+                  src="/images/Imagesz/240880991_1935504439941950_7491563113633881899_n_resize.jpg"
                   alt="Beach Wedding Ceremony"
                   fill
                   className="object-cover"
@@ -91,7 +91,7 @@ export function WeddingVenue() {
               {/* Top Right Small */}
               <div className="col-span-4 row-span-2 relative rounded-3xl overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=400&q=85"
+                  src="/images/Imagesz/240852338_1935504419941952_3622408034546398289_n_resize.jpg"
                   alt="Wedding Couple"
                   fill
                   className="object-cover"
@@ -101,7 +101,7 @@ export function WeddingVenue() {
               {/* Middle Right */}
               <div className="col-span-4 row-span-2 relative rounded-3xl overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?w=400&q=85"
+                  src="/images/Imagesz/241095108_1935504396608621_7440018229559896927_n_resize.jpg"
                   alt="Wedding Rings"
                   fill
                   className="object-cover"
@@ -111,7 +111,7 @@ export function WeddingVenue() {
               {/* Bottom Left */}
               <div className="col-span-5 row-span-2 relative rounded-3xl overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=400&q=85"
+                  src="/images/Imagesz/SWD2_resize.jpg"
                   alt="Wedding Reception"
                   fill
                   className="object-cover"
@@ -121,7 +121,7 @@ export function WeddingVenue() {
               {/* Bottom Right */}
               <div className="col-span-7 row-span-2 relative rounded-3xl overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&q=85"
+                  src="/images/Imagesz/SWD]_resize.jpg"
                   alt="Beach Wedding Setup"
                   fill
                   className="object-cover"

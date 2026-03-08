@@ -133,7 +133,7 @@ function SuccessContent() {
       <main className="min-h-screen bg-slate-900">
         <div className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80"
+            src="/images/Imagesz/DJI_20250219123702_0002_D_resize.jpg"
             alt="Beach background"
             fill
             className="object-cover opacity-20"
@@ -168,7 +168,7 @@ function SuccessContent() {
       {/* Background */}
       <div className="absolute inset-0">
         <Image
-          src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=80"
+          src="/images/Imagesz/DJI_20250219123702_0002_D_resize.jpg"
           alt="Beach background"
           fill
           className="object-cover opacity-30"

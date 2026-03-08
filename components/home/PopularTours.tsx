@@ -11,7 +11,7 @@ const tours = [
     title: 'TOUR 1',
     name: 'Beach Day',
     location: 'Koh Hey',
-    image: 'https://images.unsplash.com/photo-1520454974749-611b7248ffdb?w=600&q=80',
+    image: '/images/Imagesz/DJI_0477_resize.jpg',
     link: '/packages/beach-day',
   },
   {
@@ -19,7 +19,7 @@ const tours = [
     title: 'TOUR 2',
     name: 'Snorkeling',
     location: 'Coral Reef',
-    image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&q=80',
+    image: '/images/Imagesz/G0030171_resize.jpg',
     link: '/packages/snorkeling',
   },
   {
@@ -27,7 +27,7 @@ const tours = [
     title: 'TOUR 3',
     name: 'Island Hopping',
     location: 'Phuket Islands',
-    image: 'https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?w=600&q=80',
+    image: '/images/Imagesz/IMG_0507_resize.jpg',
     link: '/packages/island-hopping',
   },
   {
@@ -35,7 +35,7 @@ const tours = [
     title: 'TOUR 4',
     name: 'VIP Experience',
     location: 'Private Beach',
-    image: 'https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?w=600&q=80',
+    image: '/images/Imagesz/S__119693336_resize.jpg',
     link: '/packages/vip',
   },
 ];

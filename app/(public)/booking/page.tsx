@@ -42,7 +42,7 @@ const promotionalAddons = [
     description: 'Soar above Banana Beach and take in breathtaking panoramic views of turquoise seas and lush green hills. Safe, thrilling, and easy for everyone — just sit back, relax, and enjoy an unforgettable flight over paradise.',
     price: 1800,
     unit: 'Person',
-    image: 'https://images.unsplash.com/photo-1596464716127-f2a82984de30?w=400&q=80',
+    image: '/images/Imagesz/oqdOCm3w_resize.jpg',
   },
   {
     id: 'massage-1hr',
@@ -52,7 +52,7 @@ const promotionalAddons = [
     originalPrice: 600,
     discount: '10% OFF',
     unit: 'Person',
-    image: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=400&q=80',
+    image: '/images/Imagesz/zo891aaI_resize.jpg',
   },
   {
     id: 'beach-lounge-chair',
@@ -61,7 +61,7 @@ const promotionalAddons = [
     description: 'Reserve a comfortable beach lounger with umbrella for your perfect beach day.',
     price: 600,
     unit: 'Bed',
-    image: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?w=400&q=80',
+    image: '/images/Imagesz/IMG_0366 (1)_resize.jpg',
   },
   {
     id: 'banana-boat',
@@ -70,7 +70,7 @@ const promotionalAddons = [
     description: 'Hop aboard our high-performance speedboat and explore the stunning islands around Banana Beach — a perfect mix of thrill and tranquility for true adventure seekers.',
     price: 800,
     unit: 'Player',
-    image: 'https://images.unsplash.com/photo-1530866495561-507c9faab2ed?w=400&q=80',
+    image: '/images/Imagesz/BB Sea Sport Bochure_02_resize.jpg',
   },
   {
     id: 'happy-birthday',
@@ -78,7 +78,7 @@ const promotionalAddons = [
     description: 'Let Banana Beach Koh Hey be the most beautiful backdrop for your birthday. Experience the soft white sand and crystal-clear turquoise waters, along with special services that will transform your celebration into an unforgettable memory.',
     price: 1200,
     unit: 'Player',
-    image: 'https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400&q=80',
+    image: '/images/Imagesz/BananaBeachSignature_210520_25_resize.jpg',
   },
 ];
 
@@ -252,7 +252,7 @@ function BookingContent() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=1920&q=85"
+            src="/images/Imagesz/DJI_20250219123702_0002_D_resize.jpg"
             alt="Banana Beach"
             fill
             className="object-cover"

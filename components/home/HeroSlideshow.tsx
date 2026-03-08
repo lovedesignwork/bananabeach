@@ -11,7 +11,7 @@ export function HeroSlideshow() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="https://images.unsplash.com/photo-1540202404-a2f29016b523?w=1920&q=90"
+          src="/images/Imagesz/DJI_20250219123702_0002_D_resize.jpg"
           alt="Banana Beach Koh Hey"
           fill
           className="object-cover"
@@ -120,7 +120,7 @@ export function HeroSlideshow() {
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full overflow-hidden">
                     <Image
-                      src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&q=80"
+                      src="/images/Imagesz/S__30097454_resize.jpg"
                       alt="Guest"
                       width={40}
                       height={40}

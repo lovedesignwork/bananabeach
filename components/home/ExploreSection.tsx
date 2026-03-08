@@ -10,7 +10,7 @@ export function ExploreSection() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1920&q=80"
+          src="/images/Imagesz/DJI_0889_resize.jpg"
           alt="Tropical paradise"
           fill
           className="object-cover opacity-30"
@@ -62,7 +62,7 @@ export function ExploreSection() {
             {/* Large Image with Play */}
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden group cursor-pointer">
               <Image
-                src="https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?w=800&q=80"
+                src="/images/Imagesz/IMG_0628_resize.jpg"
                 alt="Beach exploration"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -78,7 +78,7 @@ export function ExploreSection() {
             {/* Second Image with Play */}
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden group cursor-pointer">
               <Image
-                src="https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=800&q=80"
+                src="/images/Imagesz/IMG_0645_resize.jpg"
                 alt="Island adventure"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
