@@ -40,7 +40,7 @@ Our professional guides will ensure your safety at every step. Listen carefully 
 3. **Take your time** - there's no rush to enjoy the beach
 4. **Enjoy the moment** - this is a once-in-a-lifetime experience!
     `,
-    image: '/images/Imagesz/DJI_0477_resize.jpg',
+    image: '/images/Imagesz/bb-19.jpg',
     author: 'Banana Beach Team',
     publishedAt: '2025-01-15',
     category: 'Adventure',
@@ -74,7 +74,7 @@ Our snorkeling equipment meets the highest safety standards, and all our guides 
 
 Come experience this one-of-a-kind adventure!
     `,
-    image: '/images/Imagesz/G0030171_resize.jpg',
+    image: '/images/Imagesz/bb-26.jpg',
     author: 'Banana Beach Team',
     publishedAt: '2025-01-10',
     category: 'Activities',
@@ -106,7 +106,7 @@ We operate with a strong commitment to protecting our coastline and marine ecosy
 
 When you visit Banana Beach, you're supporting sustainable tourism that protects Thailand's precious coastal ecosystems.
     `,
-    image: '/images/Imagesz/IMG_1015_resize.jpg',
+    image: '/images/Imagesz/bb-41.jpg',
     author: 'Banana Beach Team',
     publishedAt: '2025-01-05',
     category: 'Sustainability',

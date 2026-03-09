@@ -13,7 +13,7 @@ export function Location() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="/images/Imagesz/DJI_20241021145526_0034_D_resize.jpg"
+            src="/images/Imagesz/bb-23.jpg"
             alt="Sunset at Banana Beach"
             fill
             className="object-cover"

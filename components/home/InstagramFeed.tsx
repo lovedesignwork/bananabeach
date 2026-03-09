@@ -5,20 +5,20 @@ import Image from 'next/image';
 import { Instagram } from 'lucide-react';
 
 const instagramImages = [
-  '/images/Imagesz/DJI_0477_resize.jpg',
-  '/images/Imagesz/G0030171_resize.jpg',
-  '/images/Imagesz/IMG_0507_resize.jpg',
-  '/images/Imagesz/DJI_20241021145526_0034_D_resize.jpg',
-  '/images/Imagesz/IMG_0018_resize.jpg',
-  '/images/Imagesz/S__119693336_resize.jpg',
-  '/images/Imagesz/IMG_0366 (1)_resize.jpg',
-  '/images/Imagesz/DJI_20250219123702_0002_D_resize.jpg',
-  '/images/Imagesz/IMG_7665_resize.jpg',
-  '/images/Imagesz/IMG_1015_resize.jpg',
-  '/images/Imagesz/DJI_0889_resize.jpg',
-  '/images/Imagesz/IMG_0659_resize.jpg',
-  '/images/Imagesz/IMG_9364_resize.jpg',
-  '/images/Imagesz/IMG_7915_resize.jpg',
+  '/images/Imagesz/bb-19.jpg',
+  '/images/Imagesz/bb-26.jpg',
+  '/images/Imagesz/bb-20.jpg',
+  '/images/Imagesz/bb-23.jpg',
+  '/images/Imagesz/bb-29.jpg',
+  '/images/Imagesz/bb-69.jpg',
+  '/images/Imagesz/bb-34.jpg',
+  '/images/Imagesz/bb-24.jpg',
+  '/images/Imagesz/bb-50.jpg',
+  '/images/Imagesz/bb-41.jpg',
+  '/images/Imagesz/bb-21.jpg',
+  '/images/Imagesz/bb-37.jpg',
+  '/images/Imagesz/bb-53.jpg',
+  '/images/Imagesz/bb-51.jpg',
 ];
 
 export function InstagramFeed() {

@@ -10,7 +10,7 @@ export function ExploreSection() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="/images/Imagesz/DJI_0889_resize.jpg"
+          src="/images/Imagesz/bb-21.jpg"
           alt="Tropical paradise"
           fill
           className="object-cover opacity-30"
@@ -62,7 +62,7 @@ export function ExploreSection() {
             {/* Large Image with Play */}
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden group cursor-pointer">
               <Image
-                src="/images/Imagesz/IMG_0628_resize.jpg"
+                src="/images/Imagesz/bb-35.jpg"
                 alt="Beach exploration"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-110"
@@ -78,7 +78,7 @@ export function ExploreSection() {
             {/* Second Image with Play */}
             <div className="relative aspect-[4/3] rounded-2xl overflow-hidden group cursor-pointer">
               <Image
-                src="/images/Imagesz/IMG_0645_resize.jpg"
+                src="/images/Imagesz/bb-36.jpg"
                 alt="Island adventure"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-110"

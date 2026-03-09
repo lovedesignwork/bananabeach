@@ -120,7 +120,7 @@ export function HeroSlideshow() {
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-full overflow-hidden">
                     <Image
-                      src="/images/Imagesz/S__30097454_resize.jpg"
+                      src="/images/Imagesz/bb-65.jpg"
                       alt="Guest"
                       width={40}
                       height={40}

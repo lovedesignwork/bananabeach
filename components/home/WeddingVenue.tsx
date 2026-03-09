@@ -81,7 +81,7 @@ export function WeddingVenue() {
               {/* Main Large Image */}
               <div className="col-span-8 row-span-4 relative rounded-3xl overflow-hidden">
                 <Image
-                  src="/images/Imagesz/240880991_1935504439941950_7491563113633881899_n_resize.jpg"
+                  src="/images/Imagesz/bb-8.jpg"
                   alt="Beach Wedding Ceremony"
                   fill
                   className="object-cover"
@@ -91,7 +91,7 @@ export function WeddingVenue() {
               {/* Top Right Small */}
               <div className="col-span-4 row-span-2 relative rounded-3xl overflow-hidden">
                 <Image
-                  src="/images/Imagesz/240852338_1935504419941952_3622408034546398289_n_resize.jpg"
+                  src="/images/Imagesz/bb-7.jpg"
                   alt="Wedding Couple"
                   fill
                   className="object-cover"
@@ -101,7 +101,7 @@ export function WeddingVenue() {
               {/* Middle Right */}
               <div className="col-span-4 row-span-2 relative rounded-3xl overflow-hidden">
                 <Image
-                  src="/images/Imagesz/241095108_1935504396608621_7440018229559896927_n_resize.jpg"
+                  src="/images/Imagesz/bb-9.jpg"
                   alt="Wedding Rings"
                   fill
                   className="object-cover"
@@ -111,7 +111,7 @@ export function WeddingVenue() {
               {/* Bottom Left */}
               <div className="col-span-5 row-span-2 relative rounded-3xl overflow-hidden">
                 <Image
-                  src="/images/Imagesz/SWD2_resize.jpg"
+                  src="/images/Imagesz/bb-72.jpg"
                   alt="Wedding Reception"
                   fill
                   className="object-cover"
@@ -121,7 +121,7 @@ export function WeddingVenue() {
               {/* Bottom Right */}
               <div className="col-span-7 row-span-2 relative rounded-3xl overflow-hidden">
                 <Image
-                  src="/images/Imagesz/SWD]_resize.jpg"
+                  src="/images/Imagesz/bb-71.jpg"
                   alt="Beach Wedding Setup"
                   fill
                   className="object-cover"
