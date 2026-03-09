@@ -64,57 +64,57 @@ export function IslandExperiences() {
       <div className="absolute inset-0 pointer-events-none">
         {/* Top Left - Large */}
         <div className="absolute -top-32 -left-40 w-[400px] h-[400px] opacity-[0.12] rotate-[-25deg]">
-          <Image src="/images/Leaf.png" alt="" fill className="object-contain" />
+          <Image src="/images/Logo/Leaf.png" alt="" fill className="object-contain" />
         </div>
         
         {/* Top Right - Extra Large, Flipped */}
         <div className="absolute -top-20 -right-48 w-[450px] h-[450px] opacity-[0.08] rotate-[55deg] scale-x-[-1]">
-          <Image src="/images/Leaf.png" alt="" fill className="object-contain" />
+          <Image src="/images/Logo/Leaf.png" alt="" fill className="object-contain" />
         </div>
         
         {/* Left Side Middle - Large */}
         <div className="absolute top-[20%] -left-52 w-[380px] h-[380px] opacity-[0.10] rotate-[12deg]">
-          <Image src="/images/Leaf.png" alt="" fill className="object-contain" />
+          <Image src="/images/Logo/Leaf.png" alt="" fill className="object-contain" />
         </div>
         
         {/* Right Side Upper - Medium Large, Flipped Both */}
         <div className="absolute top-[15%] -right-36 w-[320px] h-[320px] opacity-[0.14] rotate-[-70deg] scale-x-[-1] scale-y-[-1]">
-          <Image src="/images/Leaf.png" alt="" fill className="object-contain" />
+          <Image src="/images/Logo/Leaf.png" alt="" fill className="object-contain" />
         </div>
         
         {/* Center Left - Large */}
         <div className="absolute top-[45%] -left-44 w-[360px] h-[360px] opacity-[0.08] rotate-[85deg]">
-          <Image src="/images/Leaf.png" alt="" fill className="object-contain" />
+          <Image src="/images/Logo/Leaf.png" alt="" fill className="object-contain" />
         </div>
         
         {/* Center Right - Extra Large */}
         <div className="absolute top-[40%] -right-56 w-[420px] h-[420px] opacity-[0.11] rotate-[-40deg] scale-y-[-1]">
-          <Image src="/images/Leaf.png" alt="" fill className="object-contain" />
+          <Image src="/images/Logo/Leaf.png" alt="" fill className="object-contain" />
         </div>
         
         {/* Bottom Left - Extra Large */}
         <div className="absolute -bottom-40 -left-48 w-[480px] h-[480px] opacity-[0.10] rotate-[135deg]">
-          <Image src="/images/Leaf.png" alt="" fill className="object-contain" />
+          <Image src="/images/Logo/Leaf.png" alt="" fill className="object-contain" />
         </div>
         
         {/* Bottom Right - Large, Flipped */}
         <div className="absolute -bottom-36 -right-44 w-[440px] h-[440px] opacity-[0.13] rotate-[-20deg] scale-x-[-1]">
-          <Image src="/images/Leaf.png" alt="" fill className="object-contain" />
+          <Image src="/images/Logo/Leaf.png" alt="" fill className="object-contain" />
         </div>
         
         {/* Scattered - Top Center */}
         <div className="absolute top-[5%] left-[30%] w-[280px] h-[280px] opacity-[0.05] rotate-[160deg] scale-x-[-1]">
-          <Image src="/images/Leaf.png" alt="" fill className="object-contain" />
+          <Image src="/images/Logo/Leaf.png" alt="" fill className="object-contain" />
         </div>
         
         {/* Scattered - Bottom Center */}
         <div className="absolute bottom-[10%] right-[35%] w-[300px] h-[300px] opacity-[0.06] rotate-[-110deg]">
-          <Image src="/images/Leaf.png" alt="" fill className="object-contain" />
+          <Image src="/images/Logo/Leaf.png" alt="" fill className="object-contain" />
         </div>
         
         {/* Scattered - Middle */}
         <div className="absolute top-[60%] left-[20%] w-[260px] h-[260px] opacity-[0.04] rotate-[200deg] scale-y-[-1]">
-          <Image src="/images/Leaf.png" alt="" fill className="object-contain" />
+          <Image src="/images/Logo/Leaf.png" alt="" fill className="object-contain" />
         </div>
       </div>
 

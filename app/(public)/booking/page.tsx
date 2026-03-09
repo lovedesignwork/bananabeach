@@ -264,10 +264,10 @@ function BookingContent() {
 
         {/* Decorative Banana Leaves */}
         <div className="absolute -bottom-20 -left-20 w-80 h-80 opacity-20 pointer-events-none rotate-45">
-          <Image src="/images/Leaf.png" alt="" fill className="object-contain" />
+          <Image src="/images/Logo/Leaf.png" alt="" fill className="object-contain" />
         </div>
         <div className="absolute -top-10 -right-10 w-60 h-60 opacity-15 pointer-events-none -rotate-45 scale-x-[-1]">
-          <Image src="/images/Leaf.png" alt="" fill className="object-contain" />
+          <Image src="/images/Logo/Leaf.png" alt="" fill className="object-contain" />
         </div>
 
         {/* Hero Content */}
@@ -314,10 +314,10 @@ function BookingContent() {
         {/* Background Decorative Elements */}
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute top-40 -right-40 w-96 h-96 opacity-10">
-            <Image src="/images/Leaf.png" alt="" fill className="object-contain rotate-12" />
+            <Image src="/images/Logo/Leaf.png" alt="" fill className="object-contain rotate-12" />
           </div>
           <div className="absolute bottom-20 -left-32 w-80 h-80 opacity-10 scale-x-[-1]">
-            <Image src="/images/Leaf.png" alt="" fill className="object-contain -rotate-12" />
+            <Image src="/images/Logo/Leaf.png" alt="" fill className="object-contain -rotate-12" />
           </div>
         </div>
 
@@ -643,7 +643,7 @@ function BookingContent() {
                     <div className="relative px-5 sm:px-6 py-5 sm:py-6 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
                       {/* Decorative Elements */}
                       <div className="absolute top-0 right-0 w-32 h-32 opacity-10">
-                        <Image src="/images/Leaf.png" alt="" fill className="object-contain rotate-45" />
+                        <Image src="/images/Logo/Leaf.png" alt="" fill className="object-contain rotate-45" />
                       </div>
                       <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 to-transparent" />
                       

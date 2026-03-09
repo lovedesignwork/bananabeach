@@ -103,7 +103,7 @@ export function FeaturedPackages() {
                   {/* Decorative Leaf */}
                   <div className="absolute -bottom-12 right-8 w-56 h-56 opacity-30 pointer-events-none">
                     <Image
-                      src="/images/Leaf.png"
+                      src="/images/Logo/Leaf.png"
                       alt=""
                       fill
                       className="object-contain"
