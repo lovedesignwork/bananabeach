@@ -87,7 +87,7 @@ export function Header() {
             {/* Logo */}
             <Link href="/" className="flex-shrink-0">
               <Image
-                src="/images/Logo-White-1.png"
+                src="/images/Logo/Logo-White-1.png"
                 alt="Banana Beach"
                 width={400}
                 height={120}
