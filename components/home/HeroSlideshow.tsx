@@ -11,7 +11,7 @@ export function HeroSlideshow() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="/images/Imagesz/zo891aaI_resize.jpg"
+          src="/images/heroimage.jpeg"
           alt="Banana Beach Koh Hey"
           fill
           className="object-cover"
