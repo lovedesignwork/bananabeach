@@ -9,15 +9,15 @@ const activities = [
   {
     title: 'Snorkeling',
     description: 'Explore vibrant coral reefs',
-    image: '/images/Imagesz/G0030171_resize.jpg',
+    image: '/images/Imagesz/Banana Beach # (59).jpg',
     href: '/activities/snorkeling',
     size: 'large',
   },
   {
-    title: 'Kayaking',
-    description: 'Paddle crystal waters',
-    image: '/images/Imagesz/IMG_0507_resize.jpg',
-    href: '/activities/kayaking',
+    title: 'Zipline',
+    description: 'Fly over the beach',
+    image: '/images/Imagesz/Banana Beach # (37).jpg',
+    href: '/activities/zipline',
     size: 'small',
   },
   {
@@ -28,10 +28,10 @@ const activities = [
     size: 'small',
   },
   {
-    title: 'Paddleboarding',
-    description: 'Glide on calm seas',
-    image: '/images/Imagesz/BB Sea Sport Bochure_02_resize.jpg',
-    href: '/activities/paddleboarding',
+    title: 'Clear Kayak',
+    description: 'See-through adventure',
+    image: '/images/Imagesz/Banana Beach # (7).jpg',
+    href: '/activities/clear-kayak',
     size: 'medium',
   },
   {
@@ -44,7 +44,7 @@ const activities = [
   {
     title: 'Sunset Views',
     description: 'Unforgettable moments',
-    image: '/images/Imagesz/DJI_20241021145526_0034_D_resize.jpg',
+    image: '/images/Imagesz/Banana Beach # (1).jpg',
     href: '/activities/sunset',
     size: 'small',
   },

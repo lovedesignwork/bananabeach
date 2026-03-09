@@ -38,7 +38,7 @@ const packages = [
     tagline: 'For the adventure seeker',
     price: '1,990',
     description: 'Get your adrenaline pumping with our water sports package. Kayak through calm waters, try stand-up paddleboarding, and explore the coastline at your own pace.',
-    image: '/images/Imagesz/BB Sea Sport Bochure_02_resize.jpg',
+    image: '/images/Imagesz/Banana Beach # (32).jpg',
     features: ['Kayak & Paddleboard Access', 'Beach Access Included', 'Equipment Provided', 'Speedboat Transfer', 'Full Insurance Coverage'],
     duration: 'Full Day (8AM - 5PM)',
     groupSize: 'Any group size',
