@@ -406,7 +406,7 @@ export default function PrivateCharterPage() {
             fill
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-[#0a1628]/80" />
+          <div className="absolute inset-0" style={{ backgroundColor: 'rgba(0,0,0,0.75)' }} />
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center">
